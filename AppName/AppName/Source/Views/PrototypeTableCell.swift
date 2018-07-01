@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
-class AntibioticTableCell {
+class AntibioticTableCell : UITableViewCell {
 	
 }
 
-class PatientTestTableCell {
+class PatientTestTableCell : UITableViewCell {
 	
 }

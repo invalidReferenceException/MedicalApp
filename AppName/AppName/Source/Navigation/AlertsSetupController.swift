@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import UIKit
 
-class AlertsSetupController {
+class AlertsSetupController : UITableViewController {
 	
 }

@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import UIView
 
-class LoginController {
+class LoginController : UIViewController {
 	
 }

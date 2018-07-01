@@ -1,5 +1,5 @@
 //
-//  SearchAndBrowseController.swift
+//  BrowserViewController.swift
 //  AppName
 //
 //  Created by Aglaia on 7/1/18.
@@ -7,11 +7,8 @@
 //
 
 import Foundation
+import UIKit
 
-class SearchFilterController {
-	
-}
-
-class ResultsTableViewController {
+class BrowserViewController : UITableViewController {
 	
 }

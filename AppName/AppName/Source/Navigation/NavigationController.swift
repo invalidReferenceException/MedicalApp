@@ -7,4 +7,8 @@
 //
 
 import Foundation
+import UIKit
 
+class ScannerController : UIViewController {
+
+}
