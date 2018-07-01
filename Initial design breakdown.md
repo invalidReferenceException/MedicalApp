@@ -100,7 +100,7 @@
             - ordered tab button
             - admitted tab button
         - selected tab header
-            - recently viewed(last 10), Attending, Ordered, Admitted selected label with dynamic number of list results (database data)
+            - recently viewed(last 10) (tool), Attending, Ordered, Admitted selected label with dynamic number of list results (database data)
             - sorting filter by attribute (tool)
                 - sort by label
                 - filter dropdown menu (last updated, patient name, date of birth) (navigation)
@@ -205,16 +205,51 @@ back-end tools (fetch data from json database, alert settings)
 # Tools
 
 ## email format check (tool)
+    - check for non-null
+    - check for email format correctedness (@, . after at least 1 character after @)
 ## password check (tool)
+    - check for non-null
 ## linked to authentication clearance (tool)
-## camera feed barcode scanner (tool)
-## search tests with browse query options (tool)
+    - check for email/password combo in plist file
+    - if found execute navigation to home (navigation)
+    - if not found execute error view
+## camera feed barcode scanner (tool) (API: AVFoundation)
+    - get camera feed
+    - call barcode recognizer
+    - if recognizer gets valid output (can add constraints to what is valid output we want)
+        - initiate search navigation 
+        - with output as query
+## search patient tests by query (tool)
+    - ask for database content object to database manager
+    - query the object by one specific attribute only (patient ID, patient name, browsing options attributes(by physician attendings, by tests ordered, by patients admitted,recent))
+    - passing query data to caller
+    - query object
+        - holds latest query until a new one is asked
 ## search sorting order by attribute (tool)
-## test phase alert subscription and notification service(tool)
-## retrieve test data
+    - order tuple/multidimensional array by attribute
+## recent (10) tests viewed by user (tool) (API: JSONEncoder, Encodable)
+    - when new test is sent to this tool you encode it in JSON
+    - you send it to the JSON file for the user/physician
+## test phase alert subscription and notification service(tool) (API: JSONEncoder, Encodable, JSONDecoder, Decodable)
+    - when test phase subscription is sent encode it in JSON
+    - when test phase is unsubscribed from delete record from JSON
+    - every so often check for new test phase data
+        - query your own JSON database of subscriptions for physician
+            - for each search database to see if phase is now done
+            - if yes write notification message with text and phase
+                - add to queue of active notifications
+    - maintain live record to active notifications (up to last 10)
+## retrieve current test data
+    - retrieve data for one test from the query object
+    - pass patient test object to the caller
+        - patient test object
 ## retrieve test phase (tool)
+    - pass current test phase of test object to caller
 ## antibiotic suggestion
-## comments input/output in data structure (tool)
+    - NO NEED! PATIENT TEST PHASE DATA INCLUDES ALL SUGGESTION DATA THERE IS NO MATCHING TO BE DOME WITH REFERENCE TABLE. THE SERVER DOES ALL THE SUGGESTION LOGIC WE ONLY DISPLAY IT WITH NO LOGIC TO BE DONE
+## comments input/output in data structure (tool) (API: JSONEncoder, Encodable, JSONDecoder, Decodable)
+    - retrieve comments from database manager and return them to caller
+    - take comment data and pass it to database for encoding
 
 # Navigation
 
@@ -257,6 +292,19 @@ back-end tools (fetch data from json database, alert settings)
 
 # Assets
 
-## generic graphic assets
-## settings
-## JSON database
+## graphic assets
+    - keep a record of locally available graphic assets
+    - return to caller loaded data into appropriate data object according to 
+        - file format and 
+        - caller requirements
+## settings 
+    - keep a record of locally available .plist files
+    - query .plist elements
+    - give appropriate string to caller
+## JSON database (API: JSONEncoder, Encodable, JSONDecoder, Decodable)
+    - keep a record of locally available JSON databases
+    - decode data from JSON format into Swift data structures
+    - encode data to JSON format from Swift data structures
+
+
+For the prototype there is only one test data for all test subjects, and there is only one data for antibiotic suggestion and reference tables at phase 1/inoculation; phase 2 takes phase 1's data for the reference table + phase 2 data for suggestions. final ID and organism AST have no reference table so all data is for the suggestions.
