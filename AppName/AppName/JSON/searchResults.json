@@ -1,0 +1,87 @@
+{
+    "items":[
+             {
+             "id":"M28217", "name":"Lena Webster",
+             "birthDate":"1970-10-10",
+             "specimen":{ "type":"Urine", "protocol":"Urine Culture", "source": "Clean Catch Midstream" },
+             "status":"Innoculation",
+             "estimatedCompletionDate":"2018-06-24 13:00",
+             "attendedBy": 0, "orderedBy": 0, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M28218", "name":"Hunter Anderson",
+             "birthDate":"1946-01-01",
+             "specimen":{
+             "type":"Ascites",
+             "protocol":"Sterile Body Fuid Culture"
+             },
+             "status":"Organism AST",
+             "estimatedCompletionDate":"2018-06-01 13:00",
+             "attendedBy": 1, "orderedBy": 0, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M28219", "name":"John Snow",
+             "birthDate":"1986-12-26",
+             "specimen": {"type": "Ascites", "protocol": "Sterile Body Fluid Culture"},
+             "status":"Preliminary ID",
+             "estimatedCompletionDate":"2018-06-24 13:00",
+             "attendedBy": 0, "orderedBy": 1, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M28220", "name":"Tyrion Lannister",
+             "birthDate":"1969-06-11",
+             "specimen": {"type": "Ascites", "protocol": "Sterile Body Fluid Culture"},
+             "status":"Gram Stain",
+             "estimatedCompletionDate":"2018-06-25 10:00",
+             "attendedBy": 0, "orderedBy": 0, "admittedBy": 1, "location": "In-Patient"
+             },
+             {
+             "id":"M28221", "name":"Daenerys Targaryen",
+             "birthDate":"1986-10-23",
+             "specimen": {"type": "Ascites", "protocol": "Sterile Body Fluid Culture"},
+             "status": "Preliminary ID",
+             "estimatedCompletionDate":"2018-06-24 13:00",
+             "attendedBy": 1, "orderedBy": 0, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M28222", "name":"Sansa Stark",
+             "birthDate":"1996-02-21",
+             "specimen": {"type": "Blood", "protocol": "Blood Culture", "source": "Right Upper Arm"},
+             "status": "Final ID",
+             "estimatedCompletionDate":"2018-06-23 13:00",
+             "attendedBy": 0, "orderedBy": 1, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M28223", "name":"Taylor Swipe",
+             "birthDate":"1989-12-13",
+             "specimen": {"type": "Blood", "protocol": "Blood Culture", "source": "Right Upper Arm"},
+             "status": "Preliminary ID",
+             "estimatedCompletionDate":"2018-06-24 13:00",
+             "attendedBy": 0, "orderedBy": 0, "admittedBy": 1, "location": "In-Patient"
+             },
+             {
+             "id":"M28224", "name":"Ed Sherry",
+             "birthDate":"1991-02-17",
+             "specimen": {"type": "Blood", "protocol": "Blood Culture", "source": "Right Upper Arm"},
+             "status": "Gram Stain",
+             "estimatedCompletionDate":"2018-06-24 13:00",
+             "attendedBy": 1, "orderedBy": 0, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M28225", "name":"Jackblack Longnamous",
+             "birthDate":"2000-01-01",
+             "specimen": {"type": "Ascites", "protocol": "Sterile Body Fluid Culture"},
+             "status": "Innoculation",
+             "estimatedCompletionDate":"2018-06-25 13:00",
+             "attendedBy": 1, "orderedBy": 0, "admittedBy": 0, "location": "In-Patient"
+             },
+             {
+             "id":"M12345", "name":"Nikola Tesla",
+             "birthDate":"1856-07-10",
+             "specimen": {"type": "Blood", "protocol": "Blood Culture", "source": "Right Upper Arm"},
+             "status": "Preliminary ID",
+             "estimatedCompletionDate":"2018-06-24 13:00",
+             "attendedBy": 0, "orderedBy": 0, "admittedBy": 1, "location": "In-Patient"
+             }
+             ]
+}

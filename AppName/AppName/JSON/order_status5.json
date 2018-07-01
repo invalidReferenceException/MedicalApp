@@ -1,0 +1,181 @@
+{
+    "patient": "In Ptototype this JSON value should be taken from searchResults.json for the corresponding patient.",
+
+    "status": "Organism AST",
+    "estimatedCompletionDate": {
+        "Innoculation": "2018-06-21 18:00",
+        "Gram Stain": "2018-06-21 22:00",
+        "Preliminary ID": "2018-06-22 14:00",
+        "Final ID": "2018-06-22 17:00",
+        "Organism AST": "2018-06-30 15:00",
+        "_comment": "These dates should be simulated to reflect Today (Innoculation) and Tomorrow (Preliminary ID) dates as in design. Time can be used from this file."
+    },
+    "finalAstDate": "2018-06-23 15:00",
+    "lastUpdate": "2018-06-20 16:00",
+    "_comment": "Not sure when Final AST should happen. Let's keep it between Final ID and Organism AST",
+
+    "cultureDataResults":
+    [
+     {"title":"Culture Final ID", "date": "10/02/2017 09:00", "value": "Light Growth Serratia marcescens"}
+    ],
+    "antibiogram":
+    [{
+     "group": "Beta-Lactams",
+     "antibiotics":
+     [
+      { "antibiotic": "Ampicillin", "cost": 1, "organisms": [
+       {"organism": "Entecoccus faecium",  "score": 0.25, "gramPositive": false}
+      ]},
+           { "antibiotic": "Ampicillin/Sulbactam", "cost": 1, "organisms": [
+            {"organism": "Entecoccus faecium",  "score": 0.5, "gramPositive": false}
+                                                                            ]},
+           { "antibiotic": "Imipenem/Cilastin", "cost": 2, "organisms": [
+             {"organism": "Entecoccus faecium",  "score": 0.064, "gramPositive": false}
+                                                                         ]},
+           { "antibiotic": "Meropenem", "cost": 2, "organisms": [
+             {"organism": "Entecoccus faecium",  "score": 0.125, "gramPositive": false}
+                                                                 ]},
+           { "antibiotic": "Oxacillin", "organisms": []},
+           { "antibiotic": "Penicillin", "cost": 1, "organisms": []},
+           { "antibiotic": "Piperacillin/tazobactam", "cost": 1, "organisms": []}
+        ]
+    },
+     {
+     "group": "Cephalosporins",
+     "antibiotics":
+     [
+      {
+      "antibiotic": "Cefazolin",
+      "cost": 1,
+      "organisms":
+      []},
+      {
+      "antibiotic": "Cefuroxime",
+      "cost": 1,
+      "organisms":
+      []},
+      {
+      "antibiotic": "Cefotaxime",
+      "organisms":
+      []},
+      {
+      "antibiotic": "Ceftraixone",
+      "cost": 1,
+      "organisms":
+      []},
+      {
+      "antibiotic": "Ceftazidime",
+      "cost": 1,
+      "organisms":
+      []},
+      {
+      "antibiotic": "Cefepime",
+      "cost": 1,
+      "organisms":
+      []}
+     ]
+    },
+     {
+     "group": "Aminoglycosides",
+     "antibiotics":
+     [
+      { "antibiotic":
+      "Amikacin",
+      "cost": 2,
+      "organisms":
+      []},
+      { "antibiotic":
+      "Gentamycin",
+      "cost": 2,
+      "organisms":
+      [
+       {"organism": "Entecoccus faecium",  "score": 4, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Tobramycin",
+      "cost": 2,
+      "organisms":
+      []}
+     ]
+     },
+     {
+     "group": "Fluoroquinolones",
+     "antibiotics":
+     [
+      { "antibiotic":
+      "Levofloxacin",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Entecoccus faecium",  "score": 0.5, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Ciprofloxacin",
+      "cost": 1,
+      "organisms":
+      [
+      {"organism": "Entecoccus faecium",  "score": 0.25, "gramPositive": false}
+      ]}
+      ]
+     },
+     {
+     "group": "Others",
+     "antibiotics":
+     [
+      { "antibiotic":
+      "Clindamycin",
+      "cost": 1,
+      "organisms":
+      []},
+      { "antibiotic":
+      "Daptomycin",
+      "cost": 5,
+      "organisms":
+      [
+      {"organism": "Entecoccus faecium",  "score": 0.5, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Erythromycin",
+      "cost": 2,
+      "organisms":
+      [
+       {"organism": "Entecoccus faecium",  "score": 0.125, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Linezolid",
+      "cost": 5,
+      "organisms":
+      [
+       {"organism": "Entecoccus faecium",  "score": 1, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Syndercid",
+      "cost": 5,
+      "organisms":
+      []},
+      { "antibiotic":
+      "Rifampin",
+      "cost": 1,
+      "organisms":
+      []},
+      { "antibiotic":
+      "Tetracycline",
+      "cost": 6,
+      "organisms":
+      [
+       {"organism": "Entecoccus faecium",  "score": 0.5, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Trimehoprim/Sulfa",
+      "cost": 1,
+      "organisms":
+      []},
+      { "antibiotic":
+      "Vancomycin",
+      "cost": 3,
+      "organisms":
+      []}
+      ]
+     }
+  ]
+}

@@ -1,0 +1,385 @@
+{
+    "patient": "In Ptototype this JSON value should be taken from searchResults.json for the corresponding patient.",
+
+    "status": "Preliminary ID",
+    "estimatedCompletionDate": {
+        "Innoculation": "2018-06-21 18:00",
+        "Gram Stain": "2018-06-21 22:00",
+        "Preliminary ID": "2018-06-22 14:00",
+        "Final ID": "2018-06-22 17:00",
+        "Organism AST": "2018-06-30 15:00",
+        "_comment": "These dates should be simulated to reflect Today (Innoculation) and Tomorrow (Preliminary ID) dates as in design. Time can be used from this file."
+    },
+    "finalAstDate": "2018-06-23 15:00",
+    "lastUpdate": "2018-06-20 16:00",
+    "_comment": "Not sure when Final AST should happen. Let's keep it between Final ID and Organism AST",
+
+    "cultureDataResults":
+    [
+     {"title":"Culture Preliminary Result", "date": "10/02/2017 07:45", "value": "Light Growth Non Lactose Fermenter"}
+    ],
+    "antibiogram":
+    [{
+     "group": "Beta-Lactams",
+     "antibiotics":
+     [
+      { "antibiotic": "Ampicillin", "cost": 1, "organisms": [
+      {"organism": "Acinetobacter baumanii",  "score": 0, "gramPositive": false},
+      {"organism": "C freundii",  "score": 0, "gramPositive": false},
+      {"organism": "C koseri",  "score": 0, "gramPositive": false},
+      {"organism": "E aerogenes",  "score": 0, "gramPositive": false},
+      {"organism": "E cloacae",  "score": 0, "gramPositive": false},
+      {"organism": "E coli",  "score": 0, "gramPositive": false},
+      {"organism": "K oxytoca",  "score": 0, "gramPositive": false},
+      {"organism": "K pneumoniae",  "score": 0, "gramPositive": false},
+      {"organism": "M morganii",  "score": 0, "gramPositive": false},
+      {"organism": "P mirabilis",  "score": 0, "gramPositive": false},
+      {"organism": "P aeruginosa",  "score": 0, "gramPositive": false},
+      {"organism": "Salmonella sps",  "score": 0, "gramPositive": false},
+      {"organism": "S Marcescens",  "score": 0, "gramPositive": false}
+      ]},
+           { "antibiotic": "Ampicillin/Sulbactam", "cost": 1, "organisms": [
+                {"organism": "C freundii",  "score": 0, "gramPositive": false},
+                {"organism": "C koseri",  "score": 94, "gramPositive": false},
+                {"organism": "E aerogenes",  "score": 0, "gramPositive": false},
+                {"organism": "E cloacae",  "score": 0, "gramPositive": false},
+                {"organism": "E coli",  "score": 42, "gramPositive": false},
+                {"organism": "K oxytoca",  "score": 62, "gramPositive": false},
+                {"organism": "K pneumoniae",  "score": 74, "gramPositive": false},
+                {"organism": "M morganii",  "score": 19, "gramPositive": false},
+                {"organism": "S Marcescens",  "score": 0, "gramPositive": false}
+           ]},
+           { "antibiotic": "Imipenem/Cilastin", "cost": 2, "organisms": [
+              {"organism": "Acinetobacter baumanii",  "score": 80, "gramPositive": false},
+              {"organism": "C freundii",  "score": 100, "gramPositive": false},
+              {"organism": "C koseri",  "score": 100, "gramPositive": false},
+              {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+              {"organism": "E cloacae",  "score": 96, "gramPositive": false},
+              {"organism": "E coli",  "score": 100, "gramPositive": false},
+              {"organism": "K oxytoca",  "score": 98, "gramPositive": false},
+              {"organism": "K pneumoniae",  "score": 99, "gramPositive": false},
+              {"organism": "M morganii",  "score": 100, "gramPositive": false},
+              {"organism": "P aeruginosa",  "score": 61, "gramPositive": false},
+              {"organism": "Salmonella sps",  "score": 100, "gramPositive": false},
+              {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+              ]},
+           { "antibiotic": "Meropenem", "cost": 2, "organisms": [
+             {"organism": "Acinetobacter baumanii",  "score": 87, "gramPositive": false},
+             {"organism": "C freundii",  "score": 100, "gramPositive": false},
+             {"organism": "C koseri",  "score": 100, "gramPositive": false},
+             {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+             {"organism": "E cloacae",  "score": 97, "gramPositive": false},
+             {"organism": "E coli",  "score": 100, "gramPositive": false},
+             {"organism": "K oxytoca",  "score": 98, "gramPositive": false},
+             {"organism": "K pneumoniae",  "score": 99, "gramPositive": false},
+             {"organism": "M morganii",  "score": 100, "gramPositive": false},
+               {"organism": "P mirabilis",  "score": 100, "gramPositive": false},
+             {"organism": "P aeruginosa",  "score": 68, "gramPositive": false},
+             {"organism": "Salmonella sps",  "score": 100, "gramPositive": false},
+             {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+              ]},
+           { "antibiotic": "Oxacillin", "organisms": [
+              ]},
+           { "antibiotic": "Penicillin", "cost": 1, "organisms": [
+              ]},
+           { "antibiotic": "Piperacillin/tazobactam", "cost": 1, "organisms": [
+             {"organism": "C freundii",  "score": 94, "gramPositive": false},
+             {"organism": "C koseri",  "score": 100, "gramPositive": false},
+             {"organism": "E aerogenes",  "score": 97, "gramPositive": false},
+             {"organism": "E cloacae",  "score": 85, "gramPositive": false},
+             {"organism": "E coli",  "score": 95, "gramPositive": false},
+             {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+             {"organism": "K pneumoniae",  "score": 92, "gramPositive": false},
+             {"organism": "M morganii",  "score": 96, "gramPositive": false},
+             {"organism": "P mirabilis",  "score": 95, "gramPositive": false},
+             {"organism": "P aeruginosa",  "score": 72, "gramPositive": false},
+             {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+             ]}
+        ]
+    },
+     {
+     "group": "Cephalosporins",
+     "antibiotics":
+     [
+      {
+      "antibiotic": "Cefazolin",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 0, "gramPositive": false},
+       {"organism": "C freundii",  "score": 0, "gramPositive": false},
+       {"organism": "C koseri",  "score": 72, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 0, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 0, "gramPositive": false},
+       {"organism": "E coli",  "score": 79, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 64, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 80, "gramPositive": false},
+       {"organism": "M morganii",  "score": 0, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 59, "gramPositive": false}
+       ]},
+      {
+      "antibiotic": "Cefuroxime",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 0, "gramPositive": false},
+       {"organism": "C freundii",  "score": 0, "gramPositive": false},
+       {"organism": "C koseri",  "score": 83, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 0, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 0, "gramPositive": false},
+       {"organism": "E coli",  "score": 84, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 85, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 78, "gramPositive": false},
+       {"organism": "M morganii",  "score": 0, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 70, "gramPositive": false}
+       ]},
+      {
+      "antibiotic": "Cefotaxime",
+      "organisms":
+      [
+       {"organism": "C freundii",  "score": 94, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 97, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 86, "gramPositive": false},
+       {"organism": "E coli",  "score": 86, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 92, "gramPositive": false},
+       {"organism": "M morganii",  "score": 85, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 73, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 88, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+       ]},
+      {
+      "antibiotic": "Ceftraixone",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 20, "gramPositive": false},
+       {"organism": "C freundii",  "score": 94, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 97, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 84, "gramPositive": false},
+       {"organism": "E coli",  "score": 86, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 92, "gramPositive": false},
+       {"organism": "M morganii",  "score": 100, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 72, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 88, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+       ]},
+      {
+      "antibiotic": "Ceftazidime",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 100, "gramPositive": false},
+       {"organism": "C freundii",  "score": 100, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 100, "gramPositive": false},
+       {"organism": "E coli",  "score": 87, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 92, "gramPositive": false},
+       {"organism": "M morganii",  "score": 100, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 100, "gramPositive": false},
+       {"organism": "P aeruginosa",  "score": 100, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 100, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+       ]},
+      {
+      "antibiotic": "Cefepime",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 100, "gramPositive": false},
+       {"organism": "C freundii",  "score": 100, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 95, "gramPositive": false},
+       {"organism": "E coli",  "score": 87, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 92, "gramPositive": false},
+       {"organism": "M morganii",  "score": 100, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 73, "gramPositive": false},
+       {"organism": "P aeruginosa",  "score": 67, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 100, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+       ]}
+     ]
+    },
+     {
+     "group": "Aminoglycosides",
+     "antibiotics":
+     [
+      { "antibiotic":
+      "Amikacin",
+      "cost": 2,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 100, "gramPositive": false},
+      {"organism": "C freundii",  "score": 100, "gramPositive": false},
+      {"organism": "C koseri",  "score": 100, "gramPositive": false},
+      {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+      {"organism": "E cloacae",  "score": 100, "gramPositive": false},
+      {"organism": "E coli",  "score": 100, "gramPositive": false},
+      {"organism": "K oxytoca",  "score": 100, "gramPositive": false},
+      {"organism": "K pneumoniae",  "score": 99, "gramPositive": false},
+      {"organism": "M morganii",  "score": 100, "gramPositive": false},
+      {"organism": "P mirabilis",  "score": 98, "gramPositive": false},
+      {"organism": "P aeruginosa",  "score": 91, "gramPositive": false},
+      {"organism": "S Marcescens",  "score": 98, "gramPositive": false}
+      ]},
+      { "antibiotic":
+      "Gentamycin",
+      "cost": 2,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 47, "gramPositive": false},
+       {"organism": "C freundii",  "score": 100, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 100, "gramPositive": false},
+       {"organism": "E coli",  "score": 85, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 94, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 94, "gramPositive": false},
+       {"organism": "M morganii",  "score": 78, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 68, "gramPositive": false},
+       {"organism": "P aeruginosa",  "score": 72, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 100, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Tobramycin",
+      "cost": 2,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 50, "gramPositive": false},
+       {"organism": "C freundii",  "score": 100, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 100, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 100, "gramPositive": false},
+       {"organism": "E coli",  "score": 85, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 94, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 92, "gramPositive": false},
+       {"organism": "M morganii",  "score": 85, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 66, "gramPositive": false},
+       {"organism": "P aeruginosa",  "score": 74, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 84, "gramPositive": false}
+       ]}
+     ]
+     },
+     {
+     "group": "Fluoroquinolones",
+     "antibiotics":
+     [
+      { "antibiotic":
+      "Levofloxacin",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 40, "gramPositive": false},
+       {"organism": "C freundii",  "score": 94, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 97, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 96, "gramPositive": false},
+       {"organism": "E coli",  "score": 64, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 94, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 94, "gramPositive": false},
+       {"organism": "M morganii",  "score": 85, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 49, "gramPositive": false},
+       {"organism": "P aeruginosa",  "score": 54, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 0, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 95, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Ciprofloxacin",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "Acinetobacter baumanii",  "score": 33, "gramPositive": false},
+       {"organism": "C freundii",  "score": 94, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 97, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 96, "gramPositive": false},
+       {"organism": "E coli",  "score": 63, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 91, "gramPositive": false},
+       {"organism": "M morganii",  "score": 63, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 44, "gramPositive": false},
+       {"organism": "P aeruginosa",  "score": 56, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 0, "gramPositive": false},
+       {"organism": "S Marcescens",  "score": 93, "gramPositive": false}
+       ]}
+      ]
+     },
+     {
+     "group": "Others",
+     "antibiotics":
+     [
+      { "antibiotic":
+      "Clindamycin",
+      "cost": 1,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Daptomycin",
+      "cost": 5,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Erythromycin",
+      "cost": 2,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Linezolid",
+      "cost": 5,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Syndercid",
+      "cost": 5,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Rifampin",
+      "cost": 1,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Tetracycline",
+      "cost": 6,
+      "organisms":
+      [
+       ]},
+      { "antibiotic":
+      "Trimehoprim/Sulfa",
+      "cost": 1,
+      "organisms":
+      [
+       {"organism": "C freundii",  "score": 88, "gramPositive": false},
+       {"organism": "C koseri",  "score": 100, "gramPositive": false},
+       {"organism": "E aerogenes",  "score": 90, "gramPositive": false},
+       {"organism": "E cloacae",  "score": 93, "gramPositive": false},
+       {"organism": "E coli",  "score": 64, "gramPositive": false},
+       {"organism": "K oxytoca",  "score": 90, "gramPositive": false},
+       {"organism": "K pneumoniae",  "score": 88, "gramPositive": false},
+       {"organism": "M morganii",  "score": 67, "gramPositive": false},
+       {"organism": "P mirabilis",  "score": 58, "gramPositive": false},
+       {"organism": "Salmonella sps",  "score": 100, "gramPositive": false}
+       ]},
+      { "antibiotic":
+      "Vancomycin",
+      "cost": 3,
+      "organisms":
+      [
+       ]}
+      ]
+     }
+  ]
+}
