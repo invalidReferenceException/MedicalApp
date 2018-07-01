@@ -1,5 +1,5 @@
 //
-//  TestResultsView.swift
+//  JSONLoader.swift
 //  AppName
 //
 //  Created by Aglaia on 7/1/18.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+
+class Database {
+	
+}

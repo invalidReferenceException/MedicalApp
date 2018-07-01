@@ -1,5 +1,5 @@
 //
-//  JSONLoader.swift
+//  TestResultsView.swift
 //  AppName
 //
 //  Created by Aglaia on 7/1/18.
@@ -8,4 +8,6 @@
 
 import Foundation
 
-
+class TestResultView : UiKit {
+	
+}

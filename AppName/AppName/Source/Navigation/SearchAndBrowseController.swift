@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class SearchFilterController {
+	
+}
+
+class ResultsTableViewController {
+	
+}
