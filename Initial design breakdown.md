@@ -204,71 +204,75 @@ back-end tools (fetch data from json database, alert settings)
 
 # Tools
 
-## email format check (tool)
-    - check for non-null
-    - check for email format correctedness (@, . after at least 1 character after @)
-## password check (tool)
-    - check for non-null
-## linked to authentication clearance (tool)
-    - check for email/password combo in plist file
-    - if found execute navigation to home (navigation)
-    - if not found execute error view
+## authentication tools
+    ### email format check (tool)
+        - check for non-null
+        - check for email format correctedness (@, . after at least 1 character after @)
+    ### password check (tool)
+        - check for non-null
+    ### linked to authentication clearance (tool)
+        - check for email/password combo in plist file
+        - if found execute navigation to home (navigation)
+        - if not found execute error view
 ## camera feed barcode scanner (tool) (API: AVFoundation)
     - get camera feed
     - call barcode recognizer
     - if recognizer gets valid output (can add constraints to what is valid output we want)
         - initiate search navigation 
         - with output as query
-## search patient tests by query (tool)
-    - ask for database content object to database manager
-    - query the object by one specific attribute only (patient ID, patient name, browsing options attributes(by physician attendings, by tests ordered, by patients admitted,recent))
-    - passing query data to caller
-    - query object
-        - holds latest query until a new one is asked
-## search sorting order by attribute (tool)
-    - order tuple/multidimensional array by attribute
-## recent (10) tests viewed by user (tool) (API: JSONEncoder, Encodable)
-    - when new test is sent to this tool you encode it in JSON
-    - you send it to the JSON file for the user/physician
-## test phase alert subscription and notification service(tool) (API: JSONEncoder, Encodable, JSONDecoder, Decodable)
-    - when test phase subscription is sent encode it in JSON
-    - when test phase is unsubscribed from delete record from JSON
+## patient data query
+    ### search patient tests by query (tool)
+        - ask for database content object to database manager
+        - query the object by one specific attribute only (patient ID, patient name, browsing options attributes(by physician attendings, by tests ordered, by patients admitted,recent))
+        - sort by given attribute
+        - pass query data to the filtered data object
+        - tool can pass data one by one for each object
+    ### recent (10) tests viewed by user (tool)
+        - when new test is sent to this tool you pass string keyword to JSON database
+## individual test data
+    ### retrieve current test data
+        - retrieve data for one test from the query object
+        - pass patient test object to the caller
+            - patient test object
+    ### retrieve test phase (tool)
+        - pass current test phase of test object to caller
+## test phase alert subscription and notification service(tool)
+    - when test phase subscription is sent to JSON database
+    - when test phase is unsubscribed from JSON database
     - every so often check for new test phase data
-        - query your own JSON database of subscriptions for physician
+        - query JSON database of alert subscriptions for physician
             - for each search database to see if phase is now done
             - if yes write notification message with text and phase
                 - add to queue of active notifications
     - maintain live record to active notifications (up to last 10)
-## retrieve current test data
-    - retrieve data for one test from the query object
-    - pass patient test object to the caller
-        - patient test object
-## retrieve test phase (tool)
-    - pass current test phase of test object to caller
 ## antibiotic suggestion
     - NO NEED! PATIENT TEST PHASE DATA INCLUDES ALL SUGGESTION DATA THERE IS NO MATCHING TO BE DOME WITH REFERENCE TABLE. THE SERVER DOES ALL THE SUGGESTION LOGIC WE ONLY DISPLAY IT WITH NO LOGIC TO BE DONE
-## comments input/output in data structure (tool) (API: JSONEncoder, Encodable, JSONDecoder, Decodable)
+## comments input/output in data structure (tool)
     - retrieve comments from database manager and return them to caller
     - take comment data and pass it to database for encoding
 
 # Navigation
 
-## alerts button popover (navigation)
-## physician account button popover (navigation)
+## popover controller
+    ### alerts button popover (navigation)
+    ### physician account button popover (navigation)
 ## launch screen -> home (navigation)
-## homepage -> search view (navigation)
-## homepage -> scanner view (navigation)
-## scanner -> search view search results (navigation)
-## homepage -> specific browse view tab (navigation)
-## navigation cancel button camera feed/search/browse (different back button icon/ back not cancel) -> homepage (navigation)
+## navigation controller
+    ### homepage -> search view (navigation)
+    ### homepage -> scanner view (navigation)
+    ### scanner -> search view search results (navigation)
+    ### homepage -> specific browse view tab (navigation)
+    ### navigation cancel button camera feed/search/browse (different back button icon/ back not cancel) -> homepage (navigation)
 ## test item cell -> test view (navigation)
-## browse tabs switcher (navigation)
 ## search filter dropdown (navigation)
-## test phase tabs choice mandated by test data (navigation)
+## tabs controller
+    ### browse tabs switcher (navigation)
+    ### test phase tabs choice mandated by test data (navigation)
 ## phase alerts setup (navigation)
 ## modal antibiotic reference table (navigation)
-## heatmap selection slider (navigation)
-## heatmap selection popover (navigation)
+## heatmap navigation
+    ### heatmap selection slider (navigation)
+    ### heatmap selection popover (navigation)
 ## test comment entry (navigation)
 
 
@@ -298,13 +302,24 @@ back-end tools (fetch data from json database, alert settings)
         - file format and 
         - caller requirements
 ## settings 
-    - keep a record of locally available .plist files
-    - query .plist elements
+    - query bundle main .plist account credentials
     - give appropriate string to caller
 ## JSON database (API: JSONEncoder, Encodable, JSONDecoder, Decodable)
     - keep a record of locally available JSON databases
     - decode data from JSON format into Swift data structures
     - encode data to JSON format from Swift data structures
+    - types of data passed into the program from the database:
+        - alert preferences by test by user/physician (in the dummy account.json)
+        - comments by test (in the dummy account.json)
+        - recent queries by user/physician
+        - test data
+            - test data (all of the tests)
+            - individual test data with phases
+        - physician account data
+    - types of data passed out of the program to the database:
+        - alert preferences
+        - comments
+        - recent queries
 
 
 For the prototype there is only one test data for all test subjects, and there is only one data for antibiotic suggestion and reference tables at phase 1/inoculation; phase 2 takes phase 1's data for the reference table + phase 2 data for suggestions. final ID and organism AST have no reference table so all data is for the suggestions.
