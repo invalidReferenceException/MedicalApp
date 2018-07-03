@@ -61,6 +61,7 @@ class Database {
 		
 		let targetedAntibiogram: Antibiogram
 		
+		var comments: [(authorName: String, text: String, date: String)]
 	}
 	
 	struct Antibiogram {
@@ -111,11 +112,11 @@ class Database {
 		
 	}
 	
-	func assembleTestDummies() -> [Test] {
+	func retrieveExampleTest() -> [Test] {
 		//TODO:
 	};
 	
-	func assembleReferenceTable() -> [Antibiogram] {
+	func retrieveReferenceTable() -> [Antibiogram] {
 		//TODO:
 	};
 	
