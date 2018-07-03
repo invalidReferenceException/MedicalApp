@@ -38,6 +38,7 @@
 		6C6998E120E9165F0068F365 /* TestAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998E020E9165F0068F365 /* TestAlerts.swift */; };
 		6C6998E320E916770068F365 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998E220E916770068F365 /* Comments.swift */; };
 		6C6998E520E93A2E0068F365 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998E420E93A2E0068F365 /* BrowserViewController.swift */; };
+		6CB9B1E620EAA680008A46CA /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9B1E520EAA680008A46CA /* LoginTextField.swift */; };
 		6CF4024820E8F971001684DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF4024720E8F971001684DC /* AppDelegate.swift */; };
 		6CF4024A20E8F971001684DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF4024920E8F971001684DC /* ViewController.swift */; };
 		6CF4024D20E8F971001684DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CF4024B20E8F971001684DC /* Main.storyboard */; };
@@ -77,6 +78,7 @@
 		6C6998E020E9165F0068F365 /* TestAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAlerts.swift; sourceTree = "<group>"; };
 		6C6998E220E916770068F365 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		6C6998E420E93A2E0068F365 /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		6CB9B1E520EAA680008A46CA /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		6CF4024420E8F971001684DC /* AppName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF4024720E8F971001684DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CF4024920E8F971001684DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				6C6998B320E912770068F365 /* HomePageStyle.swift */,
 				6C6998B520E912AE0068F365 /* SearchAndBrowseStyle.swift */,
 				6C6998B720E912E30068F365 /* TestResultsStyle.swift */,
+				6CB9B1E520EAA680008A46CA /* LoginTextField.swift */,
 			);
 			path = Stylers;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				6C6998BF20E913830068F365 /* NavigationController.swift in Sources */,
 				6C6998C320E913C70068F365 /* CommentsController.swift in Sources */,
 				6C6998E520E93A2E0068F365 /* BrowserViewController.swift in Sources */,
+				6CB9B1E620EAA680008A46CA /* LoginTextField.swift in Sources */,
 				6C6998E120E9165F0068F365 /* TestAlerts.swift in Sources */,
 				6C6998BB20E913320068F365 /* PopoverController.swift in Sources */,
 				6C6998DD20E915EC0068F365 /* Authentication.swift in Sources */,
