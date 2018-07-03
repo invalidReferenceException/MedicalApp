@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C6998A320E910D10068F365 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998A220E910D10068F365 /* ImageLoader.swift */; };
 		6C6998A720E9110B0068F365 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998A620E9110B0068F365 /* Database.swift */; };
 		6C6998AA20E9115F0068F365 /* AppColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998A920E9115F0068F365 /* AppColorPalette.swift */; };
 		6C6998AC20E911E50068F365 /* PrototypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6998AB20E911E50068F365 /* PrototypeTableCell.swift */; };
@@ -47,7 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6C6998A220E910D10068F365 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		6C6998A620E9110B0068F365 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		6C6998A920E9115F0068F365 /* AppColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColorPalette.swift; sourceTree = "<group>"; };
 		6C6998AB20E911E50068F365 /* PrototypeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeTableCell.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 		6C6998A120E910230068F365 /* AssetManagers */ = {
 			isa = PBXGroup;
 			children = (
-				6C6998A220E910D10068F365 /* ImageLoader.swift */,
 				6C6998A620E9110B0068F365 /* Database.swift */,
 			);
 			path = AssetManagers;
@@ -307,7 +304,6 @@
 				6C6998BB20E913320068F365 /* PopoverController.swift in Sources */,
 				6C6998DD20E915EC0068F365 /* Authentication.swift in Sources */,
 				6C6998E320E916770068F365 /* Comments.swift in Sources */,
-				6C6998A320E910D10068F365 /* ImageLoader.swift in Sources */,
 				6C6998BD20E913550068F365 /* LoginController.swift in Sources */,
 				6C6998D020E914F20068F365 /* HomepageView.swift in Sources */,
 				6C6998B820E912E30068F365 /* TestResultsStyle.swift in Sources */,

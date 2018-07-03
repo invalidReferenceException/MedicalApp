@@ -8,113 +8,116 @@
 
 import Foundation
 
-
+/*
+   This class accesses and restructures the example data of the provided JSON files into appropriate example test results associated to an example physician account and is in charge of keeping  record of the current user/physician, their tests and the antibiotic reference table.
+*/
 class Database {
 	
 	
-	var currentUser : Physician;
+	private(set) internal var currentUser : Physician?;
+	let referenceTable: Antibiogram;
 	
 	struct Physician {
-		let id: Int;
-		let email: String;
-		let avatarURL: String;
-		let firstName: String;
-		let lastName: String;
 		
-		let associatedTests: [Test];
+		let id: Int
+		let email: String
+		let avatarURL: String
+		let firstName: String
+		let lastName: String
 		
-		let recentSearches: [String];
-		let attendingCount: Int;
-		let orderedCount: Int;
-		let admittedCount: Int;
-		var notificationsCount: Int;
+		let associatedTests: [Test]
 		
-		func testsByPatientName(name: String) -> [Test];
-		func testsByPatientID(id: String) -> [Test];
-		func testsfoAttendings() -> [Test];
-		func testsOrdered() -> [Test];
-		func testsforAdmitted() -> [Test];
+		let recentSearches: [String]
+		let attendingCount: Int
+		let orderedCount: Int
+		let admittedCount: Int
 		
-		func recentQueries() -> [String];
-		func notifications() -> [(message: String, test: Test)];
+		var notificationsCount: Int
+		var notifications: [(message: String, test: Test)]?
 		
-		func addNotificationForTest(test: Test);
-		func addComment(comment: String);
+		func addNotificationForTest(test: Test)
+		func addComment(comment: String, OnTest test: Test)
 		
 	}
 	
 	struct Test {
 		
-		let patientId: String;
-		let patientName: String;
-		let patientBirthDate: String;
-		let patientLocation: String;
+		let patientId: String
+		let patientName: String
+		let patientBirthDate: String
+		let patientLocation: String
 		
-		let specimen: (type: String, protocol: String, source: String);
-		let status: String;
-		let estimatedCompletionDate: String;
+		let specimen: (type: String, protocol: String, source: String)
+		let status: String
+		let statusCheckpoints: [(checkpointTitle: String, checkpointDate: String)]
+		let estimatedCompletionDate: String
 		
-		let attendedBy: boolean;
-		let orderedBy: boolean;
-		let admittedBy: boolean;
+		let lastUpdate: String
+		let finalASTDate: String
 		
-	}
-	
-	struct TestResult {
+		let attendedBy: boolean
+		let orderedBy: boolean
+		let admittedBy: boolean
 		
-	}
-	
-	let referenceTable: (antibioticGroup: String, antibiotic: String)
-	
-	private var recentQueries;
-	private var tests;
-	private var testPhase1;
-	private var testPhase2;
-	private var testPhase3;
-	private var testPhase4;
-	private var testPhase5;
-	
-
-	
-	func encodeDataToJSON (data: String) {
+		let targetedAntibiogram: Antibiogram
 		
 	}
 	
-
+	struct Antibiogram {
+		
+		let antibioticGroup: (name: String, antibiotics: [Antibiotic])
+		
+		struct Antibiotic {
+			let name: String
+			let cost: Int
+			let organisms: (name: String, gramPositive: bool, score: Int)?
+		}
+	}
 	
 	
 	func authenticateUser(email: String, password: String) -> bool {
 		
-		if (userExists(email)) {
+		var successfullAuthentication = false
+
+		currentUser = retrievePhysicianByEmail(email);
 		
-			if (isUserPassword(password, email)) {
-				
-				currentUser = retrievePhysicianByEmail(email);
-				return true;
-			}
+		if currentUser != nil {successfullAuthentication = true}
+
+		return successfullAuthentication
+	};
+	
+	func retrievePhysicianByEmail(email : String, password: String) -> Physician? {
+		
+		var database: JSONDatabase
+		
+		let filePath = Bundle.main.path(forResource: database.accountFileName, ofType: "json", inDirectory: database.directoryName)
+		
+		//in practice there would be multiple accounts but the provided file only has one example physician account
+		let account : JSONDatabase.Account = JSONDecoder().decode(JSONDatabase.Account.self, from: filePath)
+
+		if account.email == email && account.password == password {
+	
+			return retrieveExamplePhysician()
 		}
 		
-		return false ;
+		return nil;
 	};
 	
-	func retrievePhysicianByEmail(email : String) -> Physician {
+	func retrieveExamplePhysician() -> Physician {
 		
-		//JSON decoding;jmgtgh
+		var physician = Physician();
+		//TODO:
+		return physician
+		
+	}
+	
+	func assembleTestDummies() -> [Test] {
+		//TODO:
 	};
 	
-	func isUserPassword(password: String, ForEmail email: String) -> bool {
-		
-		if (isDummyPasswordOnPlist(password) || isDummyPasswordInJSONFoEmail(password)) {return true;}
-		
-		return false;
+	func assembleReferenceTable() -> [Antibiogram] {
+		//TODO:
 	};
-	
-	func userExists(email: String) -> bool {};
-	
-	func isDummyPasswordOnPlist(password : String) -> bool {};
-	
-	func isDummyPasswordInJSONFoEmail(email:String) -> bool {};
-	
 	
 	
 	func isValidEmail(email:String?) -> Bool {
@@ -138,5 +141,74 @@ class Database {
 		return passwordTest.evaluate(with: testStr)
 	}
 	
-	
+	fileprivate struct JSONDatabase {
+		
+		let directoryName = "JSON"
+		
+		let accountFileName = "account"
+		let dashboardFileName = "dashboard"
+		let searchResultsFileName = "searchResults"
+		let orderStatus1FileName = "order_status1"
+		let orderStatus2FileName = "order_status2"
+		let orderStatus3_1FileName = "order_status3.1."
+		let orderStatus3_2FileName = "order_status3.2"
+		let orderStatus4FileName = "order_status4"
+		let orderStatus5FileName = "order_status5"
+		
+		struct Account : Decodable {
+			let id: Int
+			let email: String
+			let password: String
+			let avatarUrl: String
+			let firstName: String
+			let lastName: String
+		}
+		
+		struct DashBoard : Decodable {
+			let recentlyViewed: [String]
+			let recentlyViewedCount: Int
+			let attendingCount: Int
+			let orderedCount: Int
+			let admittedCount: Int
+			let notificationsCount: Int
+		}
+		
+		struct SearchResults : Decodable {
+			let items : [(id: String,
+						  name: String,
+						  birthDate: String,
+			              specimen: (type: String,
+					                 protocol: String,
+					                 source: String?
+			                         ),
+						  status: String,
+			              estimatedCompletionDate: String,
+			              attendedBy: bool,
+			              orderedBy: bool,
+			              admittedBy: bool,
+			              location: String
+					   )]
+		}
+		
+		struct OrderStatus : Decodable {
+			let patient: String
+			let status: String
+			let estimatedCompletionDate: CompletionDateByPhase
+			let finalAstDate: String
+			let lastUpdate: String
+			let cultureDataResults: [(title: String, date: String)]
+			
+			let antibiogram : Antibiogram?
+		}
+		
+		struct CompletionDateByPhase : Decodable {
+			let innoculation: String
+			let gramStain: String
+			let preliminaryID: String
+			let finalID: String
+			let organismAST: String
+			
+			private enum CodingKeys: String, CodingKey {case innoculation, gramStain = "Gram Stain", preliminaryID = "Preliminary ID", finalID = "Final ID", organismAST = "Organism AST"}
+		}
+	}
 }
