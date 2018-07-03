@@ -14,18 +14,19 @@ import Foundation
 class Database {
 	
 	
-	private(set) internal var currentUser : Physician?;
-	let referenceTable: Antibiogram;
+	static private(set) internal var currentUser : Physician?;
+	static private(set) internal var currentTestIndex : Int = 0;
+	static let referenceTable: Antibiogram = retrieveReferenceTable();
 	
 	struct Physician {
 		
-		let id: Int
+		let accountId: Int
 		let email: String
 		let avatarURL: String
 		let firstName: String
 		let lastName: String
 		
-		let associatedTests: [Test]
+		let associatedTests: [PatientTest]
 		
 		let recentSearches: [String]
 		let attendingCount: Int
@@ -33,21 +34,22 @@ class Database {
 		let admittedCount: Int
 		
 		var notificationsCount: Int
-		var notifications: [(message: String, test: Test)]?
+		var notifications: [(message: String, test: PatientTest)]?
 		
-		func addNotificationForTest(test: Test)
-		func addComment(comment: String, OnTest test: Test)
+		//TODO:
+		func addNotificationForTest(test: PatientTest){}
+		func addComment(comment: String, OnTest test: PatientTest){}
 		
 	}
 	
-	struct Test {
+	struct PatientTest {
 		
 		let patientId: String
 		let patientName: String
 		let patientBirthDate: String
 		let patientLocation: String
 		
-		let specimen: (type: String, protocol: String, source: String)
+		let specimen: (type: String, testingProtocol: String, source: String?)
 		let status: String
 		let statusCheckpoints: [(checkpointTitle: String, checkpointDate: String)]
 		let estimatedCompletionDate: String
@@ -55,13 +57,13 @@ class Database {
 		let lastUpdate: String
 		let finalASTDate: String
 		
-		let attendedBy: boolean
-		let orderedBy: boolean
-		let admittedBy: boolean
+		let attendedBy: Bool
+		let orderedBy: Bool
+		let admittedBy: Bool
 		
 		let targetedAntibiogram: Antibiogram
 		
-		var comments: [(authorName: String, text: String, date: String)]
+		var comments: [(authorName: String, text: String, date: String, thumbnailUrl: String)]
 	}
 	
 	struct Antibiogram {
@@ -76,7 +78,8 @@ class Database {
 	}
 	
 	
-	func authenticateUser(email: String, password: String) -> bool {
+
+	static func authenticateUser(email: String, password: String) -> bool {
 		
 		var successfullAuthentication = false
 
@@ -85,9 +88,9 @@ class Database {
 		if currentUser != nil {successfullAuthentication = true}
 
 		return successfullAuthentication
-	};
+	}
 	
-	func retrievePhysicianByEmail(email : String, password: String) -> Physician? {
+	static func retrievePhysicianByEmail(email : String, password: String) -> Physician? {
 		
 		var database: JSONDatabase
 		
@@ -98,49 +101,96 @@ class Database {
 
 		if account.email == email && account.password == password {
 	
-			return retrieveExamplePhysician()
+			return retrieveExamplePhysician(account)
 		}
 		
-		return nil;
-	};
+		return nil
+	}
 	
-	func retrieveExamplePhysician() -> Physician {
+	static func retrieveExamplePhysician(account: JSONDatabase.Account) -> Physician {
 		
-		var physician = Physician();
-		//TODO:
+		var database: JSONDatabase
+		
+		let filePath = Bundle.main.path(forResource: database.dashboardFileName, ofType: "json", inDirectory: database.directoryName)
+		let dashboard : JSONDatabase.DashBoard = JSONDecoder().decode(JSONDatabase.DashBoard.self, from: filePath)
+		
+		var physician = Physician( accountId: account.id,
+											  email: account.email,
+											  avatarURL: account.avatarUrl,
+											  firstName: account.firstName,
+											  lastName: account.lastName,
+											  associatedTests: retrieveExampleTests(),
+											  recentSearches: dashboard.recentlyViewed,
+											  attendingCount: dashboard.attendingCount,
+											  orderedCount: dashboard.orderedCount,
+											  admittedCount: dashboard.admittedCount,
+											  notificationsCount: dashboard.notificationsCount,
+											  notifications: nil
+		)
 		return physician
-		
 	}
 	
-	func retrieveExampleTest() -> [Test] {
-		//TODO:
-	};
-	
-	func retrieveReferenceTable() -> [Antibiogram] {
-		//TODO:
-	};
-	
-	
-	func isValidEmail(email:String?) -> Bool {
+	static func retrieveExampleTests() -> [PatientTest] {
 		
-		guard email != nil else { return false }
+		var database: JSONDatabase
+		let filePath = Bundle.main.path(forResource: database.searchResultsFileName, ofType: "json", inDirectory: database.directoryName)
 		
-		let regEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+		var searchResults : JSONDatabase.SearchResults = JSONDecoder().decode(JSONDatabase.SearchResults.self, from: filePath)
 		
-		let pred = NSPredicate(format:"SELF MATCHES %@", regEx)
-		return pred.evaluate(with: email)
+		var tests: [PatientTest]
+		
+
+		for searchResult in searchResults.items {
+			
+		   //one test is the summary data of the search results file + the detailed data of a sample order status for the corresponding test status
+			var testPhaseFile : String
+			switch searchResult.status {
+			
+			case "Innoculation": testPhaseFile = database.orderStatus1FileName
+			case "Gram Stain": testPhaseFile = database.orderStatus2FileName
+			case "Preliminary ID": testPhaseFile = database.orderStatus3_1FileName
+			case "Final ID": testPhaseFile = database.orderStatus4FileName
+			case "Organism AST": testPhaseFile = database.orderStatus5FileName
+			default: testPhaseFile = database.orderStatus3_2FileName
+			
+			}
+			
+			let filePath = Bundle.main.path(forResource: testPhaseFile, ofType: "json", inDirectory: database.directoryName)
+			var phaseInfo: JSONDatabase.OrderStatus = JSONDecoder().decode(JSONDatabase.OrderStatus.self, from: filePath)
+			
+			let patientTest = PatientTest(patientId: searchResult.id,
+										  patientName: searchResult.name,
+										  patientBirthDate: searchResult.birthDate,
+										  patientLocation: searchResult.location,
+										  specimen: searchResult.specimen,
+										  status: searchResult.status,
+										  statusCheckpoints: phaseInfo.cultureDataResults,
+										  estimatedCompletionDate: searchResult.estimatedCompletionDate,
+										  lastUpdate: phaseInfo.lastUpdate,
+										  fintalASTDate: phaseInfo.finalAstDate,
+										  attendedBy: searchResult.attendedBy,
+										  orderedBy: searchResult.orderedBy,
+										  admittedBy: searchResult.admittedBy
+			)
+			
+			tests += patientTest
+		}
+		
+		return tests;
 	}
 	
-	func isValidPassword(testStr:String?) -> Bool {
-		guard testStr != nil else { return false }
+	
+	static func retrieveReferenceTable() -> Antibiogram {
+		//TODO: figure out exception throwing here
+		let database: JSONDatabase
+		let filePath = Bundle.main.path(forResource: database.orderStatus2FileName, ofType: "json", inDirectory: database.directoryName)
+		let jsonData = try? Data(contentsOf: URL(fileURLWithPath: filePath!), options: .alwaysMapped)
 		
-		// at least one uppercase,
-		// at least one digit
-		// at least one lowercase
-		// 8 characters total
-		let passwordTest = NSPredicate(format: "SELF MATCHES %@", "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}")
-		return passwordTest.evaluate(with: testStr)
+		let orderStatus : JSONDatabase.OrderStatus! = try? JSONDecoder().decode(JSONDatabase.OrderStatus.self, from:jsonData!)
+		
+		return orderStatus.antibiogram!;
 	}
+	
 	
 	fileprivate struct JSONDatabase {
 		
@@ -184,9 +234,9 @@ class Database {
 			                         ),
 						  status: String,
 			              estimatedCompletionDate: String,
-			              attendedBy: bool,
-			              orderedBy: bool,
-			              admittedBy: bool,
+			              attendedBy: Bool,
+			              orderedBy: Bool,
+			              admittedBy: Bool,
 			              location: String
 					   )]
 		}
