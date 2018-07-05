@@ -73,7 +73,7 @@ class LoginController : UIViewController {
 			styleIncorrectLogin()
 		} else {
 			
-			let successfulAuthentication = Database.authenticateUser(email, password)
+			let successfulAuthentication = Database.authenticateUser(email: email!, password: password!)
 			if successfulAuthentication {
 				styleCorrectLogin()
 				performSegue(withIdentifier: "loginToHomepage", sender: sender)

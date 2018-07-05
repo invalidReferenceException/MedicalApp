@@ -11,8 +11,9 @@ import UIKit
 
 class HomepageView : UIView {
 	
-	@IBAction func OpenScanner(_ sender: UIButton) {
-	}
+	@IBOutlet var welcomeMessage: UILabel!
+	@IBOutlet var searchButton: UIButton!
+	@IBOutlet var scanButton: UIButton!
 	
 	
 }

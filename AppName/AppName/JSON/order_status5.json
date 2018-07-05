@@ -8,15 +8,13 @@
         "Preliminary ID": "2018-06-22 14:00",
         "Final ID": "2018-06-22 17:00",
         "Organism AST": "2018-06-30 15:00",
-        "_comment": "These dates should be simulated to reflect Today (Innoculation) and Tomorrow (Preliminary ID) dates as in design. Time can be used from this file."
     },
     "finalAstDate": "2018-06-23 15:00",
     "lastUpdate": "2018-06-20 16:00",
-    "_comment": "Not sure when Final AST should happen. Let's keep it between Final ID and Organism AST",
 
     "cultureDataResults":
     [
-     {"title":"Culture Final ID", "date": "10/02/2017 09:00", "value": "Light Growth Serratia marcescens"}
+     {"title":"Culture Final ID", "date": "10/02/2017 09:00", "values": ["Light Growth Serratia marcescens"]}
     ],
     "antibiogram":
     [{

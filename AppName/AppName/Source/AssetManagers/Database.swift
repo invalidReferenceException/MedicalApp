@@ -49,10 +49,10 @@ class Database {
 		let patientBirthDate: String
 		let patientLocation: String
 		
-		let specimen: (type: String, testingProtocol: String, source: String?)
+		let specimen: Specimen
 		let status: String
-		let statusCheckpoints: [(checkpointTitle: String, checkpointDate: String)]
-		let estimatedCompletionDate: String
+		let statusCheckpoints: [Checkpoint]
+		let estimatedCompletionDateByPhase: CompletionDateByPhase
 		
 		let lastUpdate: String
 		let finalASTDate: String
@@ -63,27 +63,79 @@ class Database {
 		
 		let targetedAntibiogram: Antibiogram
 		
-		var comments: [(authorName: String, text: String, date: String, thumbnailUrl: String)]
+		var comments: [Comment]?
+		
+		struct Specimen {
+			let type: String
+			let testingSpecimenProtocol: String
+			let source: String?
+		}
+		
+		
+		struct Comment {
+			let authorName: String
+			let text: String
+			let date: String
+			let thumbnailUrl: String
+		}
+		
+		
+	}
+	struct Checkpoint : Decodable {
+		let checkpointTitle: String
+		let checkpointDate: String
+		let checkpointValues: [String]?
+		
+		private enum CodingKeys: String, CodingKey {case checkpointTitle = "title", checkpointDate = "date", checkpointValues = "values"}
 	}
 	
-	struct Antibiogram {
+	struct CompletionDateByPhase : Decodable {
+		let innoculation: String
+		let gramStain: String
+		let preliminaryID: String
+		let finalID: String
+		let organismAST: String
 		
-		let antibioticGroup: (name: String, antibiotics: [Antibiotic])
+		private enum CodingKeys: String, CodingKey {case innoculation = "Innoculation", gramStain = "Gram Stain", preliminaryID = "Preliminary ID", finalID = "Final ID", organismAST = "Organism AST"}
+	}
+	
+	struct Antibiogram : Decodable {
 		
-		struct Antibiotic {
+		let antibioticGroups: [AntibioticGroup]?
+		
+		
+		struct AntibioticGroup : Decodable {
 			let name: String
-			let cost: Int
-			let organisms: (name: String, gramPositive: bool, score: Int)?
+			let antibiotics: [Antibiotic]
+			
+			private enum CodingKeys: String, CodingKey {case name = "group", antibiotics}
 		}
+		
+		struct Antibiotic : Decodable {
+			let name: String
+			let cost: Int?
+			let organisms: [Organism]?
+			
+			private enum CodingKeys: String, CodingKey {case name = "antibiotic", cost, organisms}
+			
+			struct Organism : Decodable {
+				let name: String
+				let score: Float
+				let gramPositive: Bool
+				
+				private enum CodingKeys: String, CodingKey {case name = "organism", score, gramPositive}
+			}
+		}
+		private enum CodingKeys: String, CodingKey {case antibioticGroups = "antibiogram"}
 	}
 	
 	
 
-	static func authenticateUser(email: String, password: String) -> bool {
+	static func authenticateUser(email: String, password: String) -> Bool {
 		
 		var successfullAuthentication = false
 
-		currentUser = retrievePhysicianByEmail(email);
+		currentUser = retrievePhysicianByEmail(email:email, password: password);
 		
 		if currentUser != nil {successfullAuthentication = true}
 
@@ -92,29 +144,27 @@ class Database {
 	
 	static func retrievePhysicianByEmail(email : String, password: String) -> Physician? {
 		
-		var database: JSONDatabase
-		
-		let filePath = Bundle.main.path(forResource: database.accountFileName, ofType: "json", inDirectory: database.directoryName)
+		let filePath = Bundle.main.path(forResource: JSONDatabase.accountFileName, ofType: "json", inDirectory: JSONDatabase.directoryName)
+		let jsonData = try? Data(contentsOf: URL(fileURLWithPath: filePath!), options: .alwaysMapped)
 		
 		//in practice there would be multiple accounts but the provided file only has one example physician account
-		let account : JSONDatabase.Account = JSONDecoder().decode(JSONDatabase.Account.self, from: filePath)
+		let account : JSONDatabase.Account! = try? JSONDecoder().decode(JSONDatabase.Account.self, from: jsonData!)
 
 		if account.email == email && account.password == password {
 	
-			return retrieveExamplePhysician(account)
+			return retrieveExamplePhysician(account: account)
 		}
 		
 		return nil
 	}
 	
-	static func retrieveExamplePhysician(account: JSONDatabase.Account) -> Physician {
+	fileprivate static func retrieveExamplePhysician(account: JSONDatabase.Account) -> Physician {
 		
-		var database: JSONDatabase
+		let filePath = Bundle.main.path(forResource: JSONDatabase.dashboardFileName, ofType: "json", inDirectory: JSONDatabase.directoryName)
+		let jsonData = try? Data(contentsOf: URL(fileURLWithPath: filePath!), options: .alwaysMapped)
+		let dashboard : JSONDatabase.DashBoard! = try? JSONDecoder().decode(JSONDatabase.DashBoard.self, from: jsonData!)
 		
-		let filePath = Bundle.main.path(forResource: database.dashboardFileName, ofType: "json", inDirectory: database.directoryName)
-		let dashboard : JSONDatabase.DashBoard = JSONDecoder().decode(JSONDatabase.DashBoard.self, from: filePath)
-		
-		var physician = Physician( accountId: account.id,
+		let physician = Physician( accountId: account.id,
 											  email: account.email,
 											  avatarURL: account.avatarUrl,
 											  firstName: account.firstName,
@@ -131,13 +181,13 @@ class Database {
 	}
 	
 	static func retrieveExampleTests() -> [PatientTest] {
+
+		let filePath = Bundle.main.path(forResource: JSONDatabase.searchResultsFileName, ofType: "json", inDirectory: JSONDatabase.directoryName)
 		
-		var database: JSONDatabase
-		let filePath = Bundle.main.path(forResource: database.searchResultsFileName, ofType: "json", inDirectory: database.directoryName)
+		let jsonData = try? Data(contentsOf: URL(fileURLWithPath: filePath!), options: .alwaysMapped)
+		let searchResults : JSONDatabase.SearchResults! = try? JSONDecoder().decode(JSONDatabase.SearchResults.self, from: jsonData!)
 		
-		var searchResults : JSONDatabase.SearchResults = JSONDecoder().decode(JSONDatabase.SearchResults.self, from: filePath)
-		
-		var tests: [PatientTest]
+		var tests: [PatientTest] = []
 		
 
 		for searchResult in searchResults.items {
@@ -146,34 +196,37 @@ class Database {
 			var testPhaseFile : String
 			switch searchResult.status {
 			
-			case "Innoculation": testPhaseFile = database.orderStatus1FileName
-			case "Gram Stain": testPhaseFile = database.orderStatus2FileName
-			case "Preliminary ID": testPhaseFile = database.orderStatus3_1FileName
-			case "Final ID": testPhaseFile = database.orderStatus4FileName
-			case "Organism AST": testPhaseFile = database.orderStatus5FileName
-			default: testPhaseFile = database.orderStatus3_2FileName
+			case "Innoculation": testPhaseFile = JSONDatabase.orderStatus1FileName
+			case "Gram Stain": testPhaseFile = JSONDatabase.orderStatus2FileName
+			case "Preliminary ID": testPhaseFile = JSONDatabase.orderStatus3_1FileName
+			case "Final ID": testPhaseFile = JSONDatabase.orderStatus4FileName
+			case "Organism AST": testPhaseFile = JSONDatabase.orderStatus5FileName
+			default: testPhaseFile = JSONDatabase.orderStatus3_2FileName
 			
 			}
 			
-			let filePath = Bundle.main.path(forResource: testPhaseFile, ofType: "json", inDirectory: database.directoryName)
-			var phaseInfo: JSONDatabase.OrderStatus = JSONDecoder().decode(JSONDatabase.OrderStatus.self, from: filePath)
+			let filePath = Bundle.main.path(forResource: testPhaseFile, ofType: "json", inDirectory: JSONDatabase.directoryName)
+			let jsonData = try? Data(contentsOf: URL(fileURLWithPath: filePath!), options: .alwaysMapped)
+			let phaseInfo: JSONDatabase.OrderStatus = try! JSONDecoder().decode(JSONDatabase.OrderStatus.self, from: jsonData!)
 			
 			let patientTest = PatientTest(patientId: searchResult.id,
 										  patientName: searchResult.name,
 										  patientBirthDate: searchResult.birthDate,
 										  patientLocation: searchResult.location,
-										  specimen: searchResult.specimen,
+										  specimen: PatientTest.Specimen(type:searchResult.specimen.type, testingSpecimenProtocol: searchResult.specimen.specimenProtocol, source: searchResult.specimen.source),
 										  status: searchResult.status,
 										  statusCheckpoints: phaseInfo.cultureDataResults,
-										  estimatedCompletionDate: searchResult.estimatedCompletionDate,
+										  estimatedCompletionDateByPhase: phaseInfo.estimatedCompletionDate,
 										  lastUpdate: phaseInfo.lastUpdate,
-										  fintalASTDate: phaseInfo.finalAstDate,
-										  attendedBy: searchResult.attendedBy,
-										  orderedBy: searchResult.orderedBy,
-										  admittedBy: searchResult.admittedBy
+										  finalASTDate: phaseInfo.finalAstDate,
+										  attendedBy: (searchResult.attendedBy == 1) ? true : false,
+										  orderedBy: (searchResult.orderedBy == 1) ? true : false,
+										  admittedBy: (searchResult.admittedBy == 1) ? true : false,
+										  targetedAntibiogram: (testPhaseFile == JSONDatabase.orderStatus1FileName) ? referenceTable : Antibiogram(antibioticGroups:phaseInfo.antibiogram),
+										  comments: nil
 			)
 			
-			tests += patientTest
+			tests.append(patientTest)
 		}
 		
 		return tests;
@@ -181,30 +234,32 @@ class Database {
 	
 	
 	static func retrieveReferenceTable() -> Antibiogram {
-		//TODO: figure out exception throwing here
-		let database: JSONDatabase
-		let filePath = Bundle.main.path(forResource: database.orderStatus2FileName, ofType: "json", inDirectory: database.directoryName)
+	
+		let filePath = Bundle.main.path(forResource: JSONDatabase.orderStatus2FileName, ofType: "json", inDirectory: JSONDatabase.directoryName)
 		let jsonData = try? Data(contentsOf: URL(fileURLWithPath: filePath!), options: .alwaysMapped)
 		
-		let orderStatus : JSONDatabase.OrderStatus! = try? JSONDecoder().decode(JSONDatabase.OrderStatus.self, from:jsonData!)
+		let orderStatus : JSONDatabase.OrderStatus = try! JSONDecoder().decode(JSONDatabase.OrderStatus.self, from:jsonData!)
 		
-		return orderStatus.antibiogram!;
+		print(orderStatus.cultureDataResults[0].checkpointTitle)
+		
+		
+		return Antibiogram(antibioticGroups: orderStatus.antibiogram);
 	}
 	
 	
 	fileprivate struct JSONDatabase {
 		
-		let directoryName = "JSON"
+		static let directoryName = "JSON"
 		
-		let accountFileName = "account"
-		let dashboardFileName = "dashboard"
-		let searchResultsFileName = "searchResults"
-		let orderStatus1FileName = "order_status1"
-		let orderStatus2FileName = "order_status2"
-		let orderStatus3_1FileName = "order_status3.1."
-		let orderStatus3_2FileName = "order_status3.2"
-		let orderStatus4FileName = "order_status4"
-		let orderStatus5FileName = "order_status5"
+		static let accountFileName = "account"
+		static let dashboardFileName = "dashboard"
+		static let searchResultsFileName = "searchResults"
+		static let orderStatus1FileName = "order_status1"
+		static let orderStatus2FileName = "order_status2"
+		static let orderStatus3_1FileName = "order_status3.1"
+		static let orderStatus3_2FileName = "order_status3.2"
+		static let orderStatus4FileName = "order_status4"
+		static let orderStatus5FileName = "order_status5"
 		
 		struct Account : Decodable {
 			let id: Int
@@ -225,20 +280,29 @@ class Database {
 		}
 		
 		struct SearchResults : Decodable {
-			let items : [(id: String,
-						  name: String,
-						  birthDate: String,
-			              specimen: (type: String,
-					                 protocol: String,
-					                 source: String?
-			                         ),
-						  status: String,
-			              estimatedCompletionDate: String,
-			              attendedBy: Bool,
-			              orderedBy: Bool,
-			              admittedBy: Bool,
-			              location: String
-					   )]
+			let items : [TestSummary]
+			
+			struct Specimen: Decodable {
+				let type: String
+				let specimenProtocol: String
+				let source: String?
+				
+				private enum CodingKeys: String, CodingKey {case type, specimenProtocol =  "protocol", source}
+			}
+			
+			struct TestSummary: Decodable
+			{
+				let id: String
+				let name: String
+				let birthDate: String
+				let specimen: Specimen
+				let status: String
+				let estimatedCompletionDate: String
+				let attendedBy: Int
+				let orderedBy: Int
+				let admittedBy: Int
+				let location: String
+			}
 		}
 		
 		struct OrderStatus : Decodable {
@@ -247,19 +311,10 @@ class Database {
 			let estimatedCompletionDate: CompletionDateByPhase
 			let finalAstDate: String
 			let lastUpdate: String
-			let cultureDataResults: [(title: String, date: String)]
+			let cultureDataResults: [Checkpoint]
 			
-			let antibiogram : Antibiogram?
-		}
-		
-		struct CompletionDateByPhase : Decodable {
-			let innoculation: String
-			let gramStain: String
-			let preliminaryID: String
-			let finalID: String
-			let organismAST: String
+			let antibiogram : [Antibiogram.AntibioticGroup]?
 			
-			private enum CodingKeys: String, CodingKey {case innoculation, gramStain = "Gram Stain", preliminaryID = "Preliminary ID", finalID = "Final ID", organismAST = "Organism AST"}
 		}
 	}
 }
