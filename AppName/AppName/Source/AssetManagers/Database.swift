@@ -15,7 +15,7 @@ class Database {
 	
 	
 	static private(set) internal var currentUser : Physician?;
-	static private(set) internal var currentTestIndex : Int = 0;
+	static  internal var currentTestIndex : Int = 0;
 	static let referenceTable: Antibiogram = retrieveReferenceTable();
 	
 	struct Physician {

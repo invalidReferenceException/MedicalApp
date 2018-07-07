@@ -23,19 +23,20 @@ class HomepageViewController: UIViewController {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
-		let target = segue.destination as! BrowserViewController
+		if let target = segue.destination as? BrowserViewController {
 		
-		switch segue.identifier {
-		case "toRecentlyAdded":
-			target.openSection = .RECENTLY_VIEWED
-		case "toAttending":
-			target.openSection = .ATTENDINGS
-		case "toOrdered":
-			target.openSection = .ORDERED
-		case "toAdmitted":
-			target.openSection = .ADMITTED
-		default:
-			return
+			switch segue.identifier {
+			case "toRecentlyAdded":
+				target.openSection = .RECENTLY_VIEWED
+			case "toAttending":
+				target.openSection = .ATTENDINGS
+			case "toOrdered":
+				target.openSection = .ORDERED
+			case "toAdmitted":
+				target.openSection = .ADMITTED
+			default:
+				return
+			}
 		}
 		
 	}

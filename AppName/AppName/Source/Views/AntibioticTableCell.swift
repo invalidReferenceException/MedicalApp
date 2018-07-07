@@ -12,9 +12,9 @@ class AntibioticTableCell: UITableViewCell {
 
 	@IBOutlet var nameLabel: UILabel!
 	@IBOutlet var dosageLabel: UILabel!
-	@IBOutlet var percentageCoverageLabel: UILabel!
 	@IBOutlet var disclaimerLabel: UILabel!
-	@IBOutlet var priceLabel: UIImageView!
+	@IBOutlet var priceLabel: PriceIndicator!
+	@IBOutlet var organismCoverageStack: UIStackView!
 	
 	override func awakeFromNib() {
         super.awakeFromNib()

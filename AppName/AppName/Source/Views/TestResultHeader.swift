@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestResultHeader: UIView {
+class TestResultHeader: UICollectionReusableView {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -39,44 +39,55 @@ class TestResultHeader: UIView {
 	@IBOutlet var finalIDDateLabel: UILabel!
 	@IBOutlet var organismASTDateLabel: UILabel!
 	
-	@IBOutlet var statusDetailTextLabel: UILabel!
-	@IBOutlet var statusDetailDateLabel: UILabel!
 
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
+		
+	}
+	
+	override func layoutSubviews() {
+		setupData()
+	}
+	
+	func setupData (){
 		let index = Database.currentTestIndex
 		let tests =	Database.currentUser?.associatedTests
-		let test = tests![index]
-		nameLabel.text = test.patientName
-		idLabel.text = test.patientId
-		patientLocationLabel.text = test.patientLocation
-		dateOfBirthLabel.text = test.patientBirthDate
-		testProtocolLabel.text = test.specimen.testingSpecimenProtocol
-		testTypeLabel.text = test.specimen.type
-		
-		if let testSource =  test.specimen.source{
-			specimenSourceLabel.text = testSource
+		if let test = tests?[index] {
+			
+			nameLabel.text = test.patientName
+			idLabel.text = test.patientId
+			
+			patientLocationLabel.text = test.patientLocation
+			dateOfBirthLabel.text = test.patientBirthDate
+			
+			testProtocolLabel.text = test.specimen.testingSpecimenProtocol
+			testTypeLabel.text = test.specimen.type
+			
+			if let testSource =  test.specimen.source{
+				specimenSourceLabel.text = testSource
+			}
+			else {
+				specimenSourceLabel.text = ""
+			}
+			
+			var date = formatDate(date: test.estimatedCompletionDateByPhase.innoculation, format: "yyyy-MM-dd' 'HH:mm:")
+			innoculationDateLabel.text = date
+			
+			date = formatDate(date: test.estimatedCompletionDateByPhase.gramStain, format: "yyyy-MM-dd' 'HH:mm:")
+			gramStainDateLabel.text = date
+			
+			date = formatDate(date: test.estimatedCompletionDateByPhase.preliminaryID, format: "yyyy-MM-dd' 'HH:mm:")
+			preliminaryIDDateLabel.text = date
+			
+			date = formatDate(date: test.estimatedCompletionDateByPhase.finalID, format: "yyyy-MM-dd' 'HH:mm:")
+			finalIDDateLabel.text = date
+			
+			date = formatDate(date: test.estimatedCompletionDateByPhase.organismAST, format: "yyyy-MM-dd' 'HH:mm:")
+			organismASTDateLabel.text = date
+			
 		}
-		else {
-			specimenSourceLabel.text = ""
-		}
-		
-		var date = formatDate(date: test.estimatedCompletionDateByPhase.innoculation, format: "yyyy-MM-dd' 'HH:mm:")
-		innoculationDateLabel.text = date
-		
-		date = formatDate(date: test.estimatedCompletionDateByPhase.gramStain, format: "yyyy-MM-dd' 'HH:mm:")
-		gramStainDateLabel.text = date
-		
-		date = formatDate(date: test.estimatedCompletionDateByPhase.preliminaryID, format: "yyyy-MM-dd' 'HH:mm:")
-		preliminaryIDDateLabel.text = date
-		
-		date = formatDate(date: test.estimatedCompletionDateByPhase.finalID, format: "yyyy-MM-dd' 'HH:mm:")
-		finalIDDateLabel.text = date
-		
-		date = formatDate(date: test.estimatedCompletionDateByPhase.organismAST, format: "yyyy-MM-dd' 'HH:mm:")
-		organismASTDateLabel.text = date
 	}
 	
 	func formatDate(date: String, format: String) -> String {

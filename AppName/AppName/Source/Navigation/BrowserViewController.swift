@@ -11,6 +11,7 @@ import UIKit
 
 class BrowserViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
+	@IBOutlet var header: UIView!
 	@IBOutlet var browserView: BrowserView!
 	@IBOutlet var tableView: UITableView!
 	var testsToDisplay: [Database.PatientTest] = []
@@ -66,6 +67,8 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		tableView.tableHeaderView = header
 		
 		switch openSection {
 		case BrowserSection.RECENTLY_VIEWED:
@@ -264,5 +267,28 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 		return testsToDisplay.count
 		
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+
+		let testIndex =  Database.currentUser?.associatedTests.index(where:{ (x) -> Bool in
+			
+			let selectedTest = testsToDisplay[indexPath.row]
+			
+			return x.patientId == selectedTest.patientId && x.finalASTDate == selectedTest.finalASTDate && x.lastUpdate == selectedTest.lastUpdate && x.specimen.testingSpecimenProtocol == selectedTest.specimen.testingSpecimenProtocol && x.specimen.type == selectedTest.specimen.type && x.status == selectedTest.status && x.patientName == selectedTest.patientName
+			
+		})
+		
+		if testIndex != nil {Database.currentTestIndex = testIndex!}
+		
+		print("Test index: %d", testIndex!)
+		
+		
+	}
+	
+		
+	
+	
+	
 	
 }

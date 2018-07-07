@@ -13,10 +13,12 @@ class SearchFilterController : UISearchController {
 	
 }
 
-class SearchViewController : UITableViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+class SearchViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
 	
+	@IBOutlet var header: UIView!
 	
-	var searchController = UISearchController()
+	@IBOutlet var tableView: UITableView!
+	var searchController = UISearchController(searchResultsController: nil)
 	
 	var testsToDisplay: [Database.PatientTest] = []
 	
@@ -25,8 +27,14 @@ class SearchViewController : UITableViewController, UISearchControllerDelegate, 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		searchController.searchResultsUpdater = self
+		searchController.hidesNavigationBarDuringPresentation = false
+		searchController.edgesForExtendedLayout = []
+		searchController.dimsBackgroundDuringPresentation = false
+		searchController.searchBar.sizeToFit()
 		self.navigationItem.titleView = searchController.searchBar
 		self.definesPresentationContext = true
+		
 	}
 	
 
@@ -35,6 +43,10 @@ class SearchViewController : UITableViewController, UISearchControllerDelegate, 
 	}
 	
 	func updateSearchResults(for searchController: UISearchController) {
+		
+		let count = searchController.searchBar.text?.isEmpty
+		if count! {testsToDisplay = []; searchInputText = ""; tableView.tableHeaderView = nil; tableView.reloadData(); return}
+		else {self.tableView.tableHeaderView = header}
 		
 		if let textDidChange = searchController.searchBar.text{
 		
@@ -46,19 +58,31 @@ class SearchViewController : UITableViewController, UISearchControllerDelegate, 
 			
 			for test in tests {
 				
-				if test.patientId == textDidChange || test.patientName == textDidChange{
+				if test.patientId.contains(textDidChange) || test.patientName.contains(textDidChange){
 					queried.append(test)
 				}
 			}
 			
 			testsToDisplay = queried
 			
+			
 			searchInputText = textDidChange
+			
 			self.tableView.reloadData()
 	  }
 	}
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		if  searchInputText.isEmpty  {
+			
+			let cell = tableView.dequeueReusableCell(withIdentifier: "RecentQuery")!
+		
+			cell.textLabel!.text = Database.currentUser?.recentSearches[indexPath.row]
+			cell.textLabel?.textColor = UIColor.black
+			
+			return cell
+		}
 		
 		let test = testsToDisplay[indexPath.row]
 		
@@ -74,48 +98,48 @@ class SearchViewController : UITableViewController, UISearchControllerDelegate, 
 		
 		switch test.status {
 			
-		case "Innoculation": cell.currentStatusIcon.image = #imageLiteral(resourceName: "2774752-32.png")
-		case "Gram Stain": cell.currentStatusIcon.image = #imageLiteral(resourceName: "2774750-32.png")
-		case "Preliminary ID": cell.currentStatusIcon.image = #imageLiteral(resourceName: "2774754-32.png")
-		case "Final ID": cell.currentStatusIcon.image = #imageLiteral(resourceName: "2774747-32.png")
-		case "Organism AST": cell.currentStatusIcon.image = #imageLiteral(resourceName: "2774741-32.png")
+		case "Innoculation": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Innoculation")
+		case "Gram Stain": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Preliminary-ID")
+		case "Preliminary ID": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Gram-Stain")
+		case "Final ID": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Final-ID")
+		case "Organism AST": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Organism-AST")
 			
 		default: print("No status icon selected because of unknown status.")
 			
 		}
 		
 		if test.patientId.contains(searchInputText) {
-			
-			
+
 			let defaultStyle = cell.dobLabel.attributedText?.attributes(at: 1, effectiveRange: nil)
-			
+
 			//reset the string to the same unhighlighted style as dobLabel in case it's highlighted
 			cell.idLabel.attributedText = NSAttributedString(string: cell.idLabel.text!, attributes: defaultStyle)
+            cell.nameLabel.attributedText = NSAttributedString(string: cell.nameLabel.text!, attributes: defaultStyle)
 			
-			let strNumber: NSString = test.patientId as NSString // you must set your
+			let strNumber: NSString = test.patientId as NSString
 			let range = (strNumber).range(of: searchInputText)
 			let attribute = NSMutableAttributedString.init(string: strNumber as String)
 			attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.blue , range: range)
-			
+
 			//add highlight for queried substring
 			cell.idLabel.attributedText = attribute
-			
+
 		} else if test.patientName.contains(searchInputText) {
-			
-			
+
 			let defaultStyle = cell.dobLabel.attributedText?.attributes(at: 1, effectiveRange: nil)
-			
+
 			//reset the string to the same unhighlighted style as dobLabel in case it's highlighted
 			cell.nameLabel.attributedText = NSAttributedString(string: cell.nameLabel.text!, attributes: defaultStyle)
-			
-			let strNumber: NSString = test.patientName as NSString // you must set your
+			cell.idLabel.attributedText = NSAttributedString(string: cell.idLabel.text!, attributes: defaultStyle)
+
+			let strNumber: NSString = test.patientName as NSString
 			let range = (strNumber).range(of: searchInputText)
 			let attribute = NSMutableAttributedString.init(string: strNumber as String)
 			attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.blue , range: range)
-			
+
 			//add highlight for queried substring
 			cell.nameLabel.attributedText = attribute
-			
+
 		}
 		
 		return cell
@@ -123,18 +147,35 @@ class SearchViewController : UITableViewController, UISearchControllerDelegate, 
 	}
 	
 	
-	override func numberOfSections(in tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		
+		//if the user hasn't typed a search, display recent queries instead
+		if searchInputText.isEmpty {if let count = Database.currentUser?.recentSearches.count {return count} else {return 0}}
 		
 		return testsToDisplay.count
 		
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let cell = tableView.cellForRow(at: indexPath)
+		if cell?.reuseIdentifier == "RecentQuery" {
+			
+			if let query = cell?.textLabel?.text {
+				
+				searchInputText = query
+				searchController.searchBar.text = query
+				
+				tableView.reloadData()
+			}
 
-	
-	
+		}
+		
+	}
 	
 }
 
