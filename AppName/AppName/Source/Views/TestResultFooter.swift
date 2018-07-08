@@ -12,7 +12,8 @@ class TestResultFooter: UICollectionReusableView, UITableViewDelegate, UITableVi
 	
 	var bacteriaHeader = BacteriaHeaderView()
 	
-
+	@IBOutlet var commentsArea: UIView!
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return Database.referenceTable.antibioticGroups![section].antibiotics.count
 	}
@@ -25,7 +26,9 @@ class TestResultFooter: UICollectionReusableView, UITableViewDelegate, UITableVi
 		return Database.referenceTable.antibioticGroups!.count
 	}
 	
-	
+	override func layoutSubviews() {
+		self.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: 1500)
+	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return Database.referenceTable.antibioticGroups![section].name
@@ -107,11 +110,11 @@ class TestResultFooter: UICollectionReusableView, UITableViewDelegate, UITableVi
 		
 //		let lastSection = Database.referenceTable.antibioticGroups!.count - 1
 //		let lastRow = Database.referenceTable.antibioticGroups![lastSection].antibiotics.count - 1
-//		
+//
 //		if indexPath.section == lastSection && indexPath.row == lastRow {
-//			self.bounds.size.height += tableView.contentSize.height - 400
+//			self.bounds.size.height += tableView.contentSize.height + commentsArea.frame.height
+//			self.sizeToFit()
 //		}
-		
 	}
 	
     /*

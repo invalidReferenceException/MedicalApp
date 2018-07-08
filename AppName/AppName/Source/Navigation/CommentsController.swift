@@ -6,8 +6,14 @@
 //  Copyright © 2018 Aglaia Feli. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class CommentsController {
+class CommentsController : UIViewController {
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		
+	}
 	
 }

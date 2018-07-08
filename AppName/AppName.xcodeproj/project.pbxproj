@@ -40,6 +40,7 @@
 		6CB9B1E620EAA680008A46CA /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9B1E520EAA680008A46CA /* LoginTextField.swift */; };
 		6CC56A0C20EF60F3006FBC45 /* TestResultCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC56A0B20EF60F3006FBC45 /* TestResultCollectionItem.swift */; };
 		6CC56A0E20EFE6A3006FBC45 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC56A0D20EFE6A3006FBC45 /* RoundButton.swift */; };
+		6CC8397520F1F76900768368 /* HeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8397420F1F76900768368 /* HeatmapViewController.swift */; };
 		6CC8838B20EDFD3A00106E5B /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = 6CC8838A20EDFD3900106E5B /* JSON */; };
 		6CC8838D20EE29E400106E5B /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8838C20EE29E400106E5B /* HomepageViewController.swift */; };
 		6CC8838F20EE6A1000106E5B /* SortBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8838E20EE6A1000106E5B /* SortBrowserController.swift */; };
@@ -94,6 +95,7 @@
 		6CB9B1E520EAA680008A46CA /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		6CC56A0B20EF60F3006FBC45 /* TestResultCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultCollectionItem.swift; sourceTree = "<group>"; };
 		6CC56A0D20EFE6A3006FBC45 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		6CC8397420F1F76900768368 /* HeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapViewController.swift; sourceTree = "<group>"; };
 		6CC8838A20EDFD3900106E5B /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
 		6CC8838C20EE29E400106E5B /* HomepageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; };
 		6CC8838E20EE6A1000106E5B /* SortBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortBrowserController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				6CC9F11A20ED6ACB0060EB3E /* TestResultHeaderController.swift */,
 				6CC8838C20EE29E400106E5B /* HomepageViewController.swift */,
 				6CC8838E20EE6A1000106E5B /* SortBrowserController.swift */,
+				6CC8397420F1F76900768368 /* HeatmapViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				6C6998C320E913C70068F365 /* CommentsController.swift in Sources */,
 				6C3A897E20EC01090089AD7D /* AntibioticTableCell.swift in Sources */,
 				6C6998E520E93A2E0068F365 /* BrowserViewController.swift in Sources */,
+				6CC8397520F1F76900768368 /* HeatmapViewController.swift in Sources */,
 				6CC8838D20EE29E400106E5B /* HomepageViewController.swift in Sources */,
 				6CB9B1E620EAA680008A46CA /* LoginTextField.swift in Sources */,
 				6CC56A0E20EFE6A3006FBC45 /* RoundButton.swift in Sources */,
