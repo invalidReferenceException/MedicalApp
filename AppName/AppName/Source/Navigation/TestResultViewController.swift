@@ -15,12 +15,9 @@ class TestResultViewController: UIViewController, UITableViewDelegate, UITableVi
 
 	@IBOutlet var collectionView: UICollectionView!
 	
-	@IBOutlet var bacteriaSecondaryView: BacteriaHeaderView!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		
-	
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,33 +25,34 @@ class TestResultViewController: UIViewController, UITableViewDelegate, UITableVi
         // Register cell classes
        // self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
-//	
-//	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//		//return CGSize(width: view.bounds.width, height: 250)
-//	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+		return CGSize(width: 0, height: 0)
+	}
 
 	
 	func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-		
+
 		switch kind {
-			
 		case UICollectionElementKindSectionHeader:
-			
+
 			let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionHeader", for: indexPath as IndexPath)
-	
+
 			return headerView
-			
+
 		case UICollectionElementKindSectionFooter:
-			let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionFooter", for: indexPath as IndexPath) as! TestResultFooter
-			
-			footerView.bacteriaHeader = bacteriaSecondaryView
+			 
+			let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionFooter", for: indexPath as IndexPath)
 
 			return footerView
-			
+
 		default:
 			
 			assert(false, "Unexpected element kind")
 		}
+
+	
+		
 	}
 //	override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
 //
@@ -70,7 +68,7 @@ class TestResultViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-			bacteriaSecondaryView.setNeedsLayout()
+//			bacteriaSecondaryView.setNeedsLayout()
 		
 		return  (Database.currentUser?.associatedTests[Database.currentTestIndex].statusCheckpoints.count)!
 	}

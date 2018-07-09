@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class BacteriaHeaderView: UIView {
 
     /*
@@ -65,30 +66,42 @@ class BacteriaHeaderView: UIView {
 
 		if gramNegativeHeader != nil && gramPositiveHeader != nil {
 			
+			gramPositiveHeader.safelyRemoveArrangedSubviews()
+			gramNegativeHeader.safelyRemoveArrangedSubviews()
 			
 		for bacteria in positiveBacteria {
 
-			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
+		    label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
 			label.font = UIFont(name: "Helvetica", size: 11)
 			label.text = bacteria
+			label.textAlignment = .left
 			label.textColor = UIColor.lightGray
-			label.transform = CGAffineTransform(rotationAngle: CGFloat(45 * Double.pi / 180));
+			label.transform = CGAffineTransform(rotationAngle: CGFloat(-45 * Double.pi / 180));
+			label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
+			label.sizeToFit()
 
 			//gramPositiveHeader.addSubview(label)
-			gramNegativeHeader.addArrangedSubview(label)
+			gramPositiveHeader.addArrangedSubview(label)
 		}
 
 		for bacteria in negativeBacteria {
 
-			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
+					label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
 			label.font = UIFont(name: "Helvetica", size: 11)
 			label.text = bacteria
+			label.textAlignment = .left
 			label.textColor = UIColor.lightGray
-			label.transform = CGAffineTransform(rotationAngle: CGFloat(45 * Double.pi / 180));
+			label.transform = CGAffineTransform(rotationAngle: CGFloat(-45 * Double.pi / 180));
+		    label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
+			label.sizeToFit()
 
 			//gramNegativeHeader.addSubview(label)
 			gramNegativeHeader.addArrangedSubview(label)
 		}
+			
+			
 	}
   }
 }

@@ -18,7 +18,7 @@ class TestResultCollectionItem: UICollectionViewCell, UITableViewDelegate, UITab
 	
 	@IBOutlet var title: UILabel!
 	
-	@IBOutlet var heatmap: LineChartView!
+	//@IBOutlet var heatmap: LineChartView!
 	
 	@IBOutlet var tableView: UITableView!
 	
@@ -39,9 +39,9 @@ class TestResultCollectionItem: UICollectionViewCell, UITableViewDelegate, UITab
 		
 		if let antibiotic = Database.currentUser?.associatedTests[Database.currentTestIndex].targetedAntibiogram.antibioticGroups![index].antibiotics[indexPath.row]{
 			
-			if displayOptions == .TABLE_VIEW {heatmap.isHidden = true}
-			else {heatmap.isHidden = false}
-			
+//			if displayOptions == .TABLE_VIEW {heatmap.isHidden = true}
+//			else {heatmap.isHidden = false}
+//			
 			cell.dosageLabel.isHidden = true
 			
 			cell.nameLabel.text = antibiotic.name

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class TestResultFooter: UICollectionReusableView, UITableViewDelegate, UITableViewDataSource{
+class TestResultFooter: UICollectionReusableView{
 	
 	var bacteriaHeader = BacteriaHeaderView()
 	
 	@IBOutlet var commentsArea: UIView!
+	@IBOutlet var scrollView: UIScrollView!
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return Database.referenceTable.antibioticGroups![section].antibiotics.count
@@ -21,13 +22,14 @@ class TestResultFooter: UICollectionReusableView, UITableViewDelegate, UITableVi
 	func numberOfSections(in tableView: UITableView) -> Int {
 
 		tableView.tableHeaderView = bacteriaHeader
-		//tableView.frame.size = CGSize(width: 1000, height: 1000)
+		tableView.frame.size = CGSize(width: 1500, height: 1000)
 		
 		return Database.referenceTable.antibioticGroups!.count
 	}
 	
 	override func layoutSubviews() {
 		self.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: 1500)
+
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
