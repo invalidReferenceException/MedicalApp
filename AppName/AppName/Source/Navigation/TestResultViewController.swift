@@ -50,9 +50,6 @@ class TestResultViewController: UIViewController, UITableViewDelegate, UITableVi
 			
 			assert(false, "Unexpected element kind")
 		}
-
-	
-		
 	}
 //	override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
 //
@@ -195,7 +192,7 @@ class TestResultViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 		let itemWidth = ((collectionView.bounds.size.width - CGFloat(marginsAndInsets)) / CGFloat(cellsPerRow)).rounded(.down)
 		
-		return CGSize(width: itemWidth, height: itemWidth)
+		return CGSize(width: itemWidth, height: itemWidth + 100)
 	}
 
 //	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

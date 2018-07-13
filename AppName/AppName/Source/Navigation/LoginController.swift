@@ -6,7 +6,6 @@
 //  Copyright © 2018 Aglaia Feli. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class LoginController : UIViewController {
@@ -71,6 +70,7 @@ class LoginController : UIViewController {
 		
 		if !isValidEmail(email: email) || !isValidPassword(testStr: password) {
 			styleIncorrectLogin()
+			
 		} else {
 			
 			let successfulAuthentication = Database.authenticateUser(email: email!, password: password!)
@@ -84,6 +84,7 @@ class LoginController : UIViewController {
 			
 		}
 	}
+	
 	@IBAction func forgotPasswordHelp(_ sender: Any) {
 		
 	}

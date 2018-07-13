@@ -9,19 +9,14 @@
 import Foundation
 import UIKit
 
-class SearchFilterController : UISearchController {
-	
-}
 
 class SearchViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
 	
 	@IBOutlet var header: UIView!
-	
 	@IBOutlet var tableView: UITableView!
+	
 	var searchController = UISearchController(searchResultsController: nil)
-	
 	var testsToDisplay: [Database.PatientTest] = []
-	
 	var searchInputText = ""
 	
 	override func viewDidLoad() {
@@ -37,10 +32,6 @@ class SearchViewController : UIViewController, UITableViewDelegate, UITableViewD
 		
 	}
 	
-
-	func didPresentSearchController(_ searchController: UISearchController) {
-		//TODO: display recent queries
-	}
 	
 	func updateSearchResults(for searchController: UISearchController) {
 		

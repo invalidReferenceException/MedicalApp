@@ -14,7 +14,7 @@ import Foundation
 class Database {
 	
 	
-	static private(set) internal var currentUser : Physician?;
+	static  internal var currentUser : Physician?;
 	static  internal var currentTestIndex : Int = 0;
 	static let referenceTable: Antibiogram = retrieveReferenceTable();
 	
@@ -26,7 +26,7 @@ class Database {
 		let firstName: String
 		let lastName: String
 		
-		let associatedTests: [PatientTest]
+		var associatedTests: [PatientTest]
 		
 		let recentSearches: [String]
 		let attendingCount: Int
@@ -38,8 +38,6 @@ class Database {
 		
 		//TODO:
 		func addNotificationForTest(test: PatientTest){}
-		func addComment(comment: String, OnTest test: PatientTest){}
-		
 	}
 	
 	struct PatientTest {
@@ -71,16 +69,14 @@ class Database {
 			let source: String?
 		}
 		
-		
 		struct Comment {
 			let authorName: String
 			let text: String
 			let date: String
 			let thumbnailUrl: String
 		}
-		
-		
 	}
+	
 	struct Checkpoint : Decodable {
 		let checkpointTitle: String
 		let checkpointDate: String
@@ -102,7 +98,6 @@ class Database {
 	struct Antibiogram : Decodable {
 		
 		let antibioticGroups: [AntibioticGroup]?
-		
 		
 		struct AntibioticGroup : Decodable {
 			let name: String

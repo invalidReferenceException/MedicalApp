@@ -10,13 +10,13 @@ import UIKit
 
 @IBDesignable class CircularStatusIndicator: UIView {
 
-	 var _progressLineWidth : Float = 1.0
-	 var _trackLineWidth : Float = 2.0
+	 private var _progressLineWidth : Float = 1.0
+	 private var _trackLineWidth : Float = 2.0
 	
-	 var _trackColor: UIColor = UIColor.lightGray
-	 var _progressColor: UIColor = UIColor.green
+	 private var _trackColor: UIColor = UIColor.lightGray
+	 private var _progressColor: UIColor = UIColor.green
 	
-	 var _progressStatus: Int = 360
+	 private var _progressStatus: Int = 360
 
     override func draw(_ rect: CGRect) {
         // Drawing code
@@ -30,7 +30,7 @@ import UIKit
 		
 		
 		context.setStrokeColor(_trackColor.cgColor)
-		context.setFillColor(UIColor.white.cgColor)
+		context.setFillColor(UIColor.clear.cgColor)
 		context.setLineWidth(CGFloat(_trackLineWidth))
 		context.setLineCap(CGLineCap.butt)
 		context.drawPath(using: .fillStroke)

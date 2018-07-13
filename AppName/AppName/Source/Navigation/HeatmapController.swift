@@ -14,19 +14,22 @@ class HeatmapController {
 	
 	//TODO: in truth the API I chose has included sliders and popovers in the standard chart implementation, so I might have to rename these classes
 }
-
-class HeatmapPopoverController: UIViewController {
-	
-	override func viewDidLoad() {
-		
-		super.viewDidLoad()
-		
-//		var chartView = ScatterChartView(frame: self.view.frame)
+//
+//class HeatmapPopoverController: UIViewController {
+//
+//
+//	var chartView : ScatterChartView
+//
+//	override func viewDidLoad() {
+//
+//		super.viewDidLoad()
+//
+//		chartView = ScatterChartView(frame: self.view.frame)
 //
 //		self.view.addSubview(chartView)
 //
 //		self.title = "Scatter Bar Chart"
-//		self.options = [.toggleValues,
+//		char.options = [.toggleValues,
 //						.toggleHighlight,
 //						.animateX,
 //						.animateY,
@@ -68,32 +71,77 @@ class HeatmapPopoverController: UIViewController {
 //		slidersValueChanged(nil)
 //	}
 //
-//	func setDataCount(_ count: Int, range: UInt32) {
-//		let values1 = (0..<count).map { (i) -> ChartDataEntry in
-//			let val = Double(arc4random_uniform(range) + 3)
-//			return ChartDataEntry(x: Double(i), y: val)
+//
+//	func getBacteriaData(test : Database.PatientTest, antibioticGroup: String) -> (positive: [String : Int], negative: [String : Int]){
+//
+//		var gramPositive : [String : Int] = Dictionary()
+//		var gramNegative : [String : Int] = Dictionary()
+//
+//		if let group =  test.targetedAntibiogram.antibioticGroups!.first(where: {$0.name == antibioticGroup}) {
+//
+//			for antibiotic in group.antibiotics {
+//
+//				for organism in antibiotic.organisms! {
+//
+//					if organism.gramPositive {
+//						gramPositive.updateValue(Int(organism.score), forKey: organism.name)
+//					} else {
+//						gramNegative.updateValue(Int(organism.score), forKey: organism.name)
+//					}
+//				}
+//			}
 //		}
-//		let values2 = (0..<count).map { (i) -> ChartDataEntry in
-//			let val = Double(arc4random_uniform(range) + 3)
-//			return ChartDataEntry(x: Double(i) + 0.33, y: val)
+//
+//		return (gramPositive, gramNegative)
+//	}
+//
+//
+//
+//	func inputDatainScatterChart(data: (positive: [String:Int], negative: [String:Int])) {
+//
+//
+//		let positiveValuesArray = data.positive.values
+//		let negativeValuesArray = data.negative.values
+//
+//		var yValue = 1
+//		let positiveChartValues = positiveValuesArray.map{(i) -> ChartDataEntry in
+//
+//			let entry = ChartDataEntry(x: Double(i), y: Double(yValue))
+//
+//			yValue += 1
+//
+//			return entry
 //		}
-//		let values3 = (0..<count).map { (i) -> ChartDataEntry in
-//			let val = Double(arc4random_uniform(range) + 3)
-//			return ChartDataEntry(x: Double(i) + 0.66, y: val)
+//
+//		yValue = -1
+//		let negativeChartValues = negativeValuesArray.map{(i) -> ChartDataEntry in
+//
+//			let entry = ChartDataEntry(x: Double(i), y: Double(yValue))
+//
+//			yValue -= 1
+//
+//			return entry
 //		}
 //
 //
-//		let set1 = ScatterChartDataSet(values: values1, label: "DS 1")
-//		set1.setScatterShape(.square)
-//		set1.setColor(ChartColorTemplates.colorful()[0])
-//		set1.scatterShapeSize = 8
+//		let positiveScatter = ScatterChartDataSet(values: positiveChartValues, label: "Gram Positive")
+//		positiveScatter.setScatterShape(.circle)
+//		positiveScatter.setColor(NSUIColor.blue, alpha: 0.6)
+//		positiveScatter.scatterShapeSize = 2
 //
-//		let set2 = ScatterChartDataSet(values: values2, label: "DS 2")
-//		set2.setScatterShape(.circle)
-//		set2.scatterShapeHoleColor = ChartColorTemplates.colorful()[3]
-//		set2.scatterShapeHoleRadius = 3.5
-//		set2.setColor(ChartColorTemplates.colorful()[1])
-//		set2.scatterShapeSize = 8
-	}
-	
-}
+//		let negativeScatter = ScatterChartDataSet(values: negativeChartValues, label: "Gram Negative")
+//		negativeScatter.setScatterShape(.circle)
+//		negativeScatter.setColor(NSUIColor.magenta, alpha: 0.6)
+//		negativeScatter.scatterShapeSize = 2
+//
+//
+//		let inputData = ScatterChartData(dataSets: [positiveScatter, negativeScatter])
+//		inputData.setValueFont(.systemFont(ofSize: 5, weight: .light))
+//
+//		chartView.data = inputData
+//	}
+//
+//
+//
+//
+//}

@@ -6,7 +6,6 @@
 //  Copyright © 2018 Aglaia Feli. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class BrowserViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -23,6 +22,7 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 		case LATEST_UPDATED = "Latest Updated", PATIENT_NAME = "Patient Name", DATE_OF_BIRTH = "Date of Birth"
 	}
 	
+	var openSection: BrowserSection = BrowserSection.RECENTLY_VIEWED
 	private var _currentOrder: SortingOrder = .LATEST_UPDATED
 	
 	var currentOrder: SortingOrder {
@@ -61,8 +61,6 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 			
 		}
 	}
-	
-	var openSection: BrowserSection = BrowserSection.RECENTLY_VIEWED
 	
 	
 	override func viewDidLoad() {
@@ -245,17 +243,43 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 		cell.estimatedCompletionLabel.text = test.finalASTDate
 		cell.currentStatusLabel.text = test.status
 		
+		let statusProgressIndicator = CircularStatusIndicator(frame: cell.currentStatusIcon.bounds)
+		
+		statusProgressIndicator.trackColor = UIColor.lightGray
+		statusProgressIndicator.progressColor = UIColor(red: 0, green: 153/255, blue: 0, alpha: 1.0)
+		
+		statusProgressIndicator.trackLineWidth = 3
+		statusProgressIndicator.progressLineWidth = 2
+		
+		statusProgressIndicator.backgroundColor = UIColor.clear
+		
 		switch test.status {
 			
-		case "Innoculation": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Innoculation")
-		case "Gram Stain": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Preliminary-ID")
-		case "Preliminary ID": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Gram-Stain")
-		case "Final ID": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Final-ID")
-		case "Organism AST": cell.currentStatusIcon.image = #imageLiteral(resourceName: "Organism-AST")
+		case "Innoculation":
+			cell.currentStatusIcon.image = #imageLiteral(resourceName: "Innoculation")
+			statusProgressIndicator.progressStatus = 72
+			
+		case "Gram Stain":
+			cell.currentStatusIcon.image = #imageLiteral(resourceName: "Preliminary-ID")
+			statusProgressIndicator.progressStatus = 144
+			
+		case "Preliminary ID":
+			cell.currentStatusIcon.image = #imageLiteral(resourceName: "Gram-Stain")
+			statusProgressIndicator.progressStatus = 216
+			
+		case "Final ID":
+			cell.currentStatusIcon.image = #imageLiteral(resourceName: "Final-ID")
+			statusProgressIndicator.progressStatus = 288
+			
+		case "Organism AST":
+			cell.currentStatusIcon.image = #imageLiteral(resourceName: "Organism-AST")
+			statusProgressIndicator.progressStatus = 360
 
 		default: print("No status icon selected because of unknown status.")
 			
 		}
+		
+		cell.currentStatusIcon.addSubview(statusProgressIndicator)
 		
 		return cell
 	}
@@ -270,7 +294,7 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-
+		//find the index for the selected test so its profile can be accessed
 		let testIndex =  Database.currentUser?.associatedTests.index(where:{ (x) -> Bool in
 			
 			let selectedTest = testsToDisplay[indexPath.row]
@@ -281,14 +305,8 @@ class BrowserViewController : UIViewController, UITableViewDelegate, UITableView
 		
 		if testIndex != nil {Database.currentTestIndex = testIndex!}
 		
-		print("Test index: %d", testIndex!)
-		
-		
 	}
-	
-		
-	
-	
+
 	
 	
 }

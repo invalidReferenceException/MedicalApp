@@ -20,10 +20,20 @@ class TestResultCollectionItem: UICollectionViewCell, UITableViewDelegate, UITab
 	
 	//@IBOutlet var heatmap: LineChartView!
 	
+	@IBOutlet var chart: Heatmap!
 	@IBOutlet var tableView: UITableView!
+	
+	@IBOutlet var tableViewWidth: NSLayoutConstraint!
+	@IBOutlet var scrollView: UIScrollView!
 	
 	var displayOptions = DisplayOptions.CHART_TABLEVIEW
 	var index: Int = 0
+	
+	
+//	required init?(coder aDecoder: NSCoder) {
+//		super.init(coder: aDecoder)
+//
+//	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
@@ -33,11 +43,27 @@ class TestResultCollectionItem: UICollectionViewCell, UITableViewDelegate, UITab
 		return 0
 	}
 	
+	override func layoutSubviews() {
+		
+		let colCount = 21
+		tableViewWidth.constant = (CGFloat(colCount) * 50) + 350
+		scrollView.contentSize = CGSize(width: (CGFloat(colCount) * 50) + 350, height: scrollView.frame.height)
+		
+				chart.changeBacteriaData(antibioticGroup: (Database.currentUser?.associatedTests[Database.currentTestIndex].targetedAntibiogram.antibioticGroups![index])!)
+		
+		tableView.setNeedsLayout()
+		tableView.layoutIfNeeded()
+	}
+	
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "AntibioticTableCell") as! AntibioticTableCell
 		
+		
 		if let antibiotic = Database.currentUser?.associatedTests[Database.currentTestIndex].targetedAntibiogram.antibioticGroups![index].antibiotics[indexPath.row]{
+			
+			
 			
 //			if displayOptions == .TABLE_VIEW {heatmap.isHidden = true}
 //			else {heatmap.isHidden = false}
