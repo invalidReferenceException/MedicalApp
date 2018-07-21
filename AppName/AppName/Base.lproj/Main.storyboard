@@ -252,22 +252,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" id="ve1-1m-DQ8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="AlertCell" textLabel="sCR-tC-NOq" style="IBUITableViewCellStyleDefault" id="ve1-1m-DQ8">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ve1-1m-DQ8" id="FRt-2z-jbo">
                                     <rect key="frame" x="0.0" y="0.0" width="252" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Blood Culture test Inoculation has started!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fH-0r-jHf">
-                                            <rect key="frame" x="8" y="11" width="244" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Alert Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sCR-tC-NOq">
+                                            <rect key="frame" x="16" y="0.0" width="236" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="NOv-Tc-n2k" kind="presentation" id="Aus-vp-jnt"/>
+                                    <segue destination="NOv-Tc-n2k" kind="presentation" trigger="accessoryAction" id="hNa-AY-jTg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -2002,6 +2006,11 @@ YOUR
                                     <state key="normal" title="Account">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <segue destination="qQa-I9-Q7O" kind="popoverPresentation" popoverAnchorView="SQz-85-oQE" id="032-Ev-p74">
+                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                        </segue>
+                                    </connections>
                                 </button>
                                 <connections>
                                     <segue destination="qQa-I9-Q7O" kind="popoverPresentation" popoverAnchorBarButtonItem="9uT-5u-gor" id="UNG-PT-mis">
@@ -2017,6 +2026,11 @@ YOUR
                                     <state key="normal" title="5" image="font-awesome_bell_25">
                                         <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <connections>
+                                        <segue destination="VRI-DM-8aE" kind="popoverPresentation" popoverAnchorView="z8H-sr-YBB" id="hlC-qa-hbz">
+                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                        </segue>
+                                    </connections>
                                 </button>
                                 <connections>
                                     <segue destination="VRI-DM-8aE" kind="popoverPresentation" popoverAnchorBarButtonItem="VLW-H7-u7c" id="oEN-8I-lqD">
@@ -2495,6 +2509,9 @@ YOUR
                                                                                     <state key="normal" image="font-awesome_settings_bell">
                                                                                         <color key="titleShadowColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     </state>
+                                                                                    <connections>
+                                                                                        <action selector="setupAlerts:" destination="GIe-uY-4aK" eventType="touchUpInside" id="BpR-IF-DSB"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JhU-5V-4Jh">
                                                                                     <rect key="frame" x="0.0" y="38" width="50" height="50"/>
@@ -3456,8 +3473,11 @@ YOUR
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N10-iw-aNO"/>
+        <segue reference="Aus-vp-jnt"/>
         <segue reference="mnl-yO-icF"/>
         <segue reference="ffR-PT-kt3"/>
         <segue reference="8mA-qQ-hcL"/>
+        <segue reference="oEN-8I-lqD"/>
+        <segue reference="UNG-PT-mis"/>
     </inferredMetricsTieBreakers>
 </document>

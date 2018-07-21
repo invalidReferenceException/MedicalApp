@@ -12,7 +12,8 @@ import UIKit
 private let reuseIdentifier = "CollectionCell"
 
 class TestResultViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+	
+	
 	@IBOutlet var collectionView: UICollectionView!
 	
 	

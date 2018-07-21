@@ -33,11 +33,9 @@ class Database {
 		let orderedCount: Int
 		let admittedCount: Int
 		
-		var notificationsCount: Int
-		var notifications: [(message: String, test: PatientTest)]?
-		
-		//TODO:
-		func addNotificationForTest(test: PatientTest){}
+		var notificationSubscriptions: [(test: PatientTest, phase: String)]?
+		var notificationAlerts: [(test: PatientTest, phase: String)]?
+	
 	}
 	
 	struct PatientTest {
@@ -132,7 +130,13 @@ class Database {
 
 		currentUser = retrievePhysicianByEmail(email:email, password: password);
 		
-		if currentUser != nil {successfullAuthentication = true}
+		if currentUser != nil {
+			let notifications = retrieveExampleNotifications()
+			currentUser!.notificationAlerts = notifications
+			
+			successfullAuthentication = true
+			
+		}
 
 		return successfullAuthentication
 	}
@@ -169,10 +173,27 @@ class Database {
 											  attendingCount: dashboard.attendingCount,
 											  orderedCount: dashboard.orderedCount,
 											  admittedCount: dashboard.admittedCount,
-											  notificationsCount: dashboard.notificationsCount,
-											  notifications: nil
+											  notificationSubscriptions: nil,
+											  notificationAlerts: nil
 		)
 		return physician
+	}
+	
+	
+	static func retrieveExampleNotifications() -> [(test: PatientTest, phase: String)] {
+		
+		var notifications : [(test: PatientTest, phase: String)] = []
+		
+		if let tests = currentUser?.associatedTests {
+			
+			for test in tests {
+			
+				notifications.append((test: test, phase: test.status))
+			}
+		}
+		
+		return notifications
+		
 	}
 	
 	static func retrieveExampleTests() -> [PatientTest] {
