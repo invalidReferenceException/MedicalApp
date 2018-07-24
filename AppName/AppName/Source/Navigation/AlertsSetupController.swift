@@ -23,8 +23,6 @@ class AlertsSetupController : UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let alertCell = tableView.dequeueReusableCell(withIdentifier: "AlertCell", for: indexPath)
 		
-		
-		
 		if let notification = Database.currentUser?.notificationAlerts![indexPath.row] {
 			
 			let message = notification.phase + " completed for: " + notification.test.specimen.type + " for patient: " + notification.test.patientName
@@ -43,12 +41,10 @@ class AlertsSetupController : UITableViewController {
 				
 				return x.patientId == selectedTest.patientId && x.finalASTDate == selectedTest.finalASTDate && x.lastUpdate == selectedTest.lastUpdate && x.specimen.testingSpecimenProtocol == selectedTest.specimen.testingSpecimenProtocol && x.specimen.type == selectedTest.specimen.type && x.status == selectedTest.status && x.patientName == selectedTest.patientName
 			}
-			
-			
+
            return false
 		})
 		
 		if testIndex != nil {Database.currentTestIndex = testIndex!}
 	}
-	
 }

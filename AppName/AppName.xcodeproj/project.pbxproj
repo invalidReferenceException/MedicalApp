@@ -56,6 +56,7 @@
 		6CC9F11B20ED6ACB0060EB3E /* TestResultHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9F11A20ED6ACB0060EB3E /* TestResultHeaderController.swift */; };
 		6CCB9AA020F0992C0003B766 /* BacteriaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB9A9F20F0992C0003B766 /* BacteriaHeaderView.swift */; };
 		6CCB9AA220F0E4950003B766 /* PriceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB9AA120F0E4950003B766 /* PriceIndicator.swift */; };
+		6CCC21272104A32A0046E9C0 /* AlarmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCC21262104A32A0046E9C0 /* AlarmButton.swift */; };
 		6CE4080620F3D8C100E8469D /* CircularStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC60D1620F371450082AD5A /* CircularStatusIndicator.swift */; };
 		6CE9F9B520EC20AA002CEDAE /* TestResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE9F9B420EC20AA002CEDAE /* TestResultViewController.swift */; };
 		6CF4024820E8F971001684DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF4024720E8F971001684DC /* AppDelegate.swift */; };
@@ -119,6 +120,7 @@
 		6CC9F11A20ED6ACB0060EB3E /* TestResultHeaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultHeaderController.swift; sourceTree = "<group>"; };
 		6CCB9A9F20F0992C0003B766 /* BacteriaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacteriaHeaderView.swift; sourceTree = "<group>"; };
 		6CCB9AA120F0E4950003B766 /* PriceIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceIndicator.swift; sourceTree = "<group>"; };
+		6CCC21262104A32A0046E9C0 /* AlarmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmButton.swift; sourceTree = "<group>"; };
 		6CE9F9B420EC20AA002CEDAE /* TestResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultViewController.swift; sourceTree = "<group>"; };
 		6CF4024420E8F971001684DC /* AppName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF4024720E8F971001684DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				6CC688C720F4845B00E1CE46 /* Heatmap.swift */,
 				6C5C4C8320F7A8AB00485718 /* CommentsArea.swift */,
 				6C14907B20F87DDB00576570 /* CommentCell.swift */,
+				6CCC21262104A32A0046E9C0 /* AlarmButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				6CF4024A20E8F971001684DC /* ViewController.swift in Sources */,
 				6CF4024820E8F971001684DC /* AppDelegate.swift in Sources */,
 				6CCB9AA220F0E4950003B766 /* PriceIndicator.swift in Sources */,
+				6CCC21272104A32A0046E9C0 /* AlarmButton.swift in Sources */,
 				6C6998BF20E913830068F365 /* ScannerController.swift in Sources */,
 				6CC688C820F4845B00E1CE46 /* Heatmap.swift in Sources */,
 				6C4BE7F220EBFB0D0002CC24 /* TestResultTableCell.swift in Sources */,

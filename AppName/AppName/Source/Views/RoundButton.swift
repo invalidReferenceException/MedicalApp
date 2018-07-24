@@ -36,7 +36,7 @@ import UIKit
 		sharedInit()
 	}
 	
-	func sharedInit(){
+	private func sharedInit(){
 		refreshCorners(value: cornerRadius)
 		refreshColor(color: backgroundImageColor)
 	}

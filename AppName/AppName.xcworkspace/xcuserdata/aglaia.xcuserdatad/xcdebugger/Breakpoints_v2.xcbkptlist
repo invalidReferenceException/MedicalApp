@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppName/Source/Views/BacteriaHeaderView.swift"
-            timestampString = "552866446.8561341"
+            timestampString = "554113594.5349441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -25,13 +25,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppName/Source/Views/TestResultHeader.swift"
-            timestampString = "553883973.259032"
+            filePath = "AppName/Source/Views/AlarmButton.swift"
+            timestampString = "554115264.1675169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "setupAlerts(_:)"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "currentPhase"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppName/Source/Views/AlarmButton.swift"
+            timestampString = "554115264.167599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "alarmButtonAction()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,46 +57,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppName/Source/Views/TestResultHeader.swift"
-            timestampString = "553883973.259123"
+            filePath = "AppName/Source/Views/AlarmButton.swift"
+            timestampString = "554115264.1676641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "setupAlerts(_:)"
-            landmarkType = "7">
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "currentPhase"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppName/Source/Views/TestResultHeader.swift"
-            timestampString = "553883973.259199"
+            filePath = "AppName/Source/Views/AlarmButton.swift"
+            timestampString = "554115264.16812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "alarmButtonPressed(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppName/Source/Views/TestResultHeader.swift"
-            timestampString = "553883973.259269"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "alarmButtonPressed(sender:)"
-            landmarkType = "7">
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "currentPhase"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
