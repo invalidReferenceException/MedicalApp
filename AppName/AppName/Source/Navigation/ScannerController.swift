@@ -15,10 +15,10 @@ class ScannerController : UIViewController, AVCaptureMetadataOutputObjectsDelega
 	var cameraFeedLayer: AVCaptureVideoPreviewLayer?
 	var barcodeFrame: UIView?
 	
-	@IBOutlet var scannerFrameView: ScannerView!
+	@IBOutlet var scannerFrameView: UIView!
 	@IBOutlet var statusMessage: UILabel!
 	
-	
+	var barcode: String?
 	
 	override func viewDidLoad() {
 		
@@ -90,17 +90,22 @@ class ScannerController : UIViewController, AVCaptureMetadataOutputObjectsDelega
 				statusMessage.text = " Scan completed, loading patient's order status.."
 				statusMessage.backgroundColor = UIColor.green
 				
-				//TODO: pass scanned value to presented search controller
-				//let latestScannedID = metadataObj.stringValue
-				//let searchController: SearchViewController
-				
-				//we probably want to send an ID that is related to the barcode rather than a barcode directly, but for now we search the raw barcode and present the search view
-				//searchController.searchInputText = metadataObj.stringValue!
+				barcode = metadataObj.stringValue!
 				performSegue(withIdentifier: "searchScannedId", sender: self)
 			}
 			
 		}
 		
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier ==  "searchScannedId" {
+			
+		    //we probably want to send an ID that is related to the barcode rather than a barcode directly, but for now we search the raw barcode and present the search view
+			let searchController = segue.destination as! SearchViewController
+			searchController.searchInputText = barcode ?? ""
+			
+		}
 	}
 
 }

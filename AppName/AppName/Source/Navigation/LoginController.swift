@@ -12,7 +12,6 @@ class LoginController : UIViewController {
 	
 	@IBOutlet var emailField: LoginTextField!
 	@IBOutlet var passwordField: LoginTextField!
-	
 	@IBOutlet var incorrectLoginMessage: UILabel!
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -81,7 +80,6 @@ class LoginController : UIViewController {
 			else {
 				styleIncorrectLogin()
 			}
-			
 		}
 	}
 	

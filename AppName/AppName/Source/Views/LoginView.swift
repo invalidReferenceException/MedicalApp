@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class LoginView : UIView {
+	
 	@IBOutlet var emailField: LoginTextField!
 	@IBOutlet var passwordField: LoginTextField!
-	
-	
-	
+
 }

@@ -38,9 +38,7 @@ class HomepageViewController: UIViewController {
 				return
 			}
 		}
-		
-	}
-	
+	}	
 
     /*
     // MARK: - Navigation

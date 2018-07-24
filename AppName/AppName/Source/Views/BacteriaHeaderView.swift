@@ -71,37 +71,45 @@ class BacteriaHeaderView: UIView {
 			
 		for bacteria in positiveBacteria {
 
-			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
-		    label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
-			label.font = UIFont(name: "Helvetica", size: 11)
+			let label = bacteriaLabel()
 			label.text = bacteria
-			label.textAlignment = .left
-			label.textColor = UIColor.lightGray
-			label.transform = CGAffineTransform(rotationAngle: CGFloat(-45 * Double.pi / 180));
-			label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
-			label.sizeToFit()
-
-			//gramPositiveHeader.addSubview(label)
 			gramPositiveHeader.addArrangedSubview(label)
 		}
 
 		for bacteria in negativeBacteria {
 
-			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
-					label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
-			label.font = UIFont(name: "Helvetica", size: 11)
+            let label = bacteriaLabel()
 			label.text = bacteria
-			label.textAlignment = .left
-			label.textColor = UIColor.lightGray
-			label.transform = CGAffineTransform(rotationAngle: CGFloat(-45 * Double.pi / 180));
-		    label.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
-			label.sizeToFit()
-
-			//gramNegativeHeader.addSubview(label)
 			gramNegativeHeader.addArrangedSubview(label)
 		}
 			
 			
 	}
   }
+
+	
+	func bacteriaLabel() -> UILabel {
+		
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 150))
+		label.clipsToBounds = false
+		label.lineBreakMode = .byClipping
+		label.font = UIFont(name: "Helvetica", size: 11)
+		label.textAlignment = .left
+		label.textColor = UIColor.lightGray
+		
+		label.transform = CGAffineTransform(rotationAngle: CGFloat(-45 * Double.pi / 180));
+		// Width constraint
+		label.addConstraint(NSLayoutConstraint.init(item:label,
+													attribute:NSLayoutAttribute.width,
+													relatedBy:NSLayoutRelation.equal,
+													toItem:nil,
+													attribute: NSLayoutAttribute.notAnAttribute,
+													multiplier:1,
+													constant:40))
+		
+		return label
+	
+	}
+	
+
 }

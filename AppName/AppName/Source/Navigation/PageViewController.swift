@@ -19,9 +19,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
 		super.init(coder: coder)
 		
 		self.delegate = self
-		self.dataSource = self
-
-		
+		self.dataSource = self	
 	}
 	
     override func didReceiveMemoryWarning() {

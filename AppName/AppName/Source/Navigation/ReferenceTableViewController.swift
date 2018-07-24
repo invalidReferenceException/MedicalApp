@@ -31,23 +31,14 @@ class ReferenceTableViewController: UIViewController, UITableViewDelegate, UITab
 	
 	@IBOutlet var commentsArea: UIView!
 	@IBOutlet var scrollView: UIScrollView!
-	@IBOutlet var bacteriaHeader: BacteriaHeaderView!
-	
+	@IBOutlet var bacteriaHeader: BacteriaHeaderView!	
 	@IBOutlet var tableView: UITableView!
 	@IBOutlet weak var tableVIewWidth: NSLayoutConstraint!
-	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-        // Do any additional setup after loading the view.
-
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -88,11 +79,11 @@ class ReferenceTableViewController: UIViewController, UITableViewDelegate, UITab
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
 		let antibiotic = Database.referenceTable.antibioticGroups![indexPath.section].antibiotics[indexPath.row]
 		let cell = tableView.dequeueReusableCell(withIdentifier: "AntibioticTableCell") as! AntibioticTableCell
 		
 		cell.dosageLabel.isHidden = true
-		
 		cell.nameLabel.text = antibiotic.name
 		
 		if let cost = antibiotic.cost {
@@ -101,136 +92,36 @@ class ReferenceTableViewController: UIViewController, UITableViewDelegate, UITab
 		}
 		
 		cell.organismCoverageStack.safelyRemoveArrangedSubviews()
-
-		
+	
 		let organisms = antibiotic.organisms!
 		
 		for organism in bacteriaHeader.positiveBacteria {
 			if let match = organisms.first(where: {$0.name == organism}) {
 				
-				let label = labelForOrganismMatchWithAntibiotic(organism: match)
+				let label = cell.labelForOrganismMatchWithAntibiotic(organism: match)
 				cell.organismCoverageStack.addArrangedSubview(label)
-				
-				print("positive recognized : " + organism)
 				
 			} else {
 			
-			let emptyLabel = UILabel()
-			emptyLabel.bounds = CGRect(x: 0, y: 0, width: 40, height: 25)
-				// Width constraint
-				emptyLabel.addConstraint(NSLayoutConstraint.init(item:emptyLabel,
-															attribute:NSLayoutAttribute.width,
-															relatedBy:NSLayoutRelation.equal,
-															toItem:nil,
-															attribute: NSLayoutAttribute.notAnAttribute,
-															multiplier:1,
-															constant:40))
-				//emptyLabel.alpha = 0
-				emptyLabel.textAlignment = .center
-				emptyLabel.text = "00"
-			cell.organismCoverageStack.addArrangedSubview(emptyLabel)
-				print("positive blank : " + organism)
+			    let emptyLabel = cell.makeLabel()
+				cell.organismCoverageStack.addArrangedSubview(emptyLabel)
 			}
-			
 		}
 		
 		for organism in bacteriaHeader.negativeBacteria {
 			if let match = organisms.first(where: {$0.name == organism})  {
 				
-				let label = labelForOrganismMatchWithAntibiotic(organism: match)
+				let label = cell.labelForOrganismMatchWithAntibiotic(organism: match)
 				cell.organismCoverageStack.addArrangedSubview(label)
-
-				
-				print("negative recognized : " + organism)
 
 			} else {
 
-				let emptyLabel = UILabel()
-				emptyLabel.bounds = CGRect(x: 0, y: 0, width: 40, height: 25)
-				// Width constraint
-				emptyLabel.addConstraint(NSLayoutConstraint.init(item:emptyLabel,
-															attribute:NSLayoutAttribute.width,
-															relatedBy:NSLayoutRelation.equal,
-															toItem:nil,
-															attribute: NSLayoutAttribute.notAnAttribute,
-															multiplier:1,
-															constant:40))
-				//emptyLabel.alpha = 0
-				emptyLabel.textAlignment = .center
-				emptyLabel.text = "00"
+				let emptyLabel = cell.makeLabel()
 				cell.organismCoverageStack.addArrangedSubview(emptyLabel)
-
-				print("negative blank : " + organism)
 			}
-
 		}
 		
 		return cell
-	}
-	
-	
-	func labelForOrganismMatchWithAntibiotic(organism: Database.Antibiogram.Antibiotic.Organism) -> UILabel{
-			
-			let score = Int(organism.score)
-			var label = UILabel()
-			label.textAlignment = NSTextAlignment.center
-			label.bounds = CGRect(x: 0, y: 0, width: 40, height: 25)
-			
-			
-			// Width constraint
-			label.addConstraint(NSLayoutConstraint.init(item:label,
-														attribute:NSLayoutAttribute.width,
-														relatedBy:NSLayoutRelation.equal,
-														toItem:nil,
-														attribute: NSLayoutAttribute.notAnAttribute,
-														multiplier:1,
-														constant:40))
-			
-			// Height constraint
-			label.addConstraint(NSLayoutConstraint.init(item:label,
-														attribute:NSLayoutAttribute.height,
-														relatedBy:NSLayoutRelation.equal,
-														toItem:nil,
-														attribute: NSLayoutAttribute.notAnAttribute,
-														multiplier:1,
-														constant:27))
-			
-			label.text = String(score)
-			label.textColor = UIColor.black
-			label.font = UIFont(name: "Helvetica-Medium", size: 14)
-			label.accessibilityIdentifier = organism.name
-			
-			if organism.score < 40
-			{label.backgroundColor = UIColor(red: 255/255.0, green: 51/255.0, blue: 0/255.0, alpha: 1)
-				label.textColor = UIColor.white
-			}
-			else if organism.score > 60
-			{label.backgroundColor = UIColor(red: 51/255.0, green: 204/255.0, blue: 153/255.0, alpha: 1)
-				label.textColor = UIColor.white
-			}
-			
-			if organism.score == 0 {
-				label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 25))
-				//label.alpha = 0
-				label.textAlignment = .center
-				label.text = "00"
-				
-		}
-		
-		return label
-		
-	}
-	
-	
-	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		
-		//		let lastSection = Database.referenceTable.antibioticGroups!.count - 1
-		//		let lastRow = Database.referenceTable.antibioticGroups![lastSection].antibiotics.count - 1
-		//
-		//		if indexPath.section == lastSection && indexPath.row == lastRow {
-		//			self.bounds.size.height += tableView.contentSize.height + commentsArea.frame.height
-		//			self.sizeToFit()
-		//		}
 	}
 	
 	/*
@@ -240,19 +131,5 @@ class ReferenceTableViewController: UIViewController, UITableViewDelegate, UITab
 	// Drawing code
 	}
 	*/
-	
-	//	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-	//		return UITableViewAutomaticDimension
-	//	}
-	//
-	//	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-	//		return UITableViewAutomaticDimension
-	//	}
-	//
-	required init?(coder aDecoder: NSCoder) {
-		
-		super.init(coder: aDecoder)
-	}
-	
 
 }

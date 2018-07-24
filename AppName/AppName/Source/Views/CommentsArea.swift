@@ -40,7 +40,7 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		
 		newCommentBody.isHidden = false
 		newCommentBody.isEditable = true
-		newCommentBody.text = ""
+		//newCommentBody.text = ""
 		newCommentBody.becomeFirstResponder()
 		
 		addCommentButton.isHidden = true
@@ -49,18 +49,18 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBAction func cancelCommentPressed(_ sender: Any) {
 	
-		newCommentBody.text = ""
+		//newCommentBody.text = ""
 		newCommentBody.isEditable = false
 		newCommentBody.resignFirstResponder()
 		
 		saveAndCancelButtons.isHidden = true
 		addCommentButton.isHidden = false
 		
-		newCommentAvatar.isHidden = true
-		newCommentAuthorName.isHidden = true
-		newCommentAuthorTagline.isHidden = true
-		newCommentDate.isHidden = true
-		newCommentBody.isHidden = true
+		//newCommentAvatar.isHidden = true
+		//newCommentAuthorName.isHidden = true
+		//newCommentAuthorTagline.isHidden = true
+		//newCommentDate.isHidden = true
+		//newCommentBody.isHidden = true
 	}
 	
 	@IBAction func saveCommentPressed(_ sender: Any) {
@@ -70,18 +70,20 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		
 		Database.currentUser?.associatedTests[Database.currentTestIndex].comments?.append(comment)
 		
-		newCommentBody.text = ""
+		//newCommentBody.text = ""
 		newCommentBody.isEditable = false
 		newCommentBody.resignFirstResponder()
 		
 		saveAndCancelButtons.isHidden = true
 		addCommentButton.isHidden = false
 		
-		newCommentAvatar.isHidden = true
-		newCommentAuthorName.isHidden = true
-		newCommentAuthorTagline.isHidden = true
-		newCommentDate.isHidden = true
-		newCommentBody.isHidden = true
+//		newCommentAvatar.isHidden = true
+//		newCommentAuthorName.isHidden = true
+//		newCommentAuthorTagline.isHidden = true
+//		newCommentDate.isHidden = true
+		//newCommentBody.isHidden = true
+		
+		self.setNeedsDisplay()
 	}
 	
 	

@@ -10,7 +10,6 @@ import UIKit
 
 class SortBrowserController: UITableViewController {
 
-
 	@IBOutlet var latestUpdated: UITableViewCell!
 	@IBOutlet var patientName: UITableViewCell!
 	@IBOutlet var dateOfBirth: UITableViewCell!
