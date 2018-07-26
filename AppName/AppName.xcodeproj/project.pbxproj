@@ -188,14 +188,14 @@
 				6CC9F11220ECB70B0060EB3E /* TestResultHeader.swift */,
 				6CC9F11420ECB7290060EB3E /* TestResultFooter.swift */,
 				6CC56A0B20EF60F3006FBC45 /* TestResultCollectionItem.swift */,
-				6CC56A0D20EFE6A3006FBC45 /* RoundButton.swift */,
 				6CCB9A9F20F0992C0003B766 /* BacteriaHeaderView.swift */,
-				6CCB9AA120F0E4950003B766 /* PriceIndicator.swift */,
-				6CC60D1620F371450082AD5A /* CircularStatusIndicator.swift */,
 				6CC688C720F4845B00E1CE46 /* Heatmap.swift */,
 				6C5C4C8320F7A8AB00485718 /* CommentsArea.swift */,
 				6C14907B20F87DDB00576570 /* CommentCell.swift */,
+				6CC60D1620F371450082AD5A /* CircularStatusIndicator.swift */,
+				6CC56A0D20EFE6A3006FBC45 /* RoundButton.swift */,
 				6CCC21262104A32A0046E9C0 /* AlarmButton.swift */,
+				6CCB9AA120F0E4950003B766 /* PriceIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -108,12 +108,10 @@ class AlarmButton: RoundButton {
 		}
 	}
 
-	
 	func checkNotificationSubscription(For phase: TestPhase) -> Bool {
 		
 		var isSubscribed = false
 
-		
 		let subscriptionIndex = Database.currentUser?.notificationSubscriptions?.index(where: { (test, subPhase) -> Bool in
 			
 			if subPhase == phase.rawValue {
@@ -134,5 +132,5 @@ class AlarmButton: RoundButton {
 		
 		return isSubscribed
 	}
-
+	
 }

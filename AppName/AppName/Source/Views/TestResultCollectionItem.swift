@@ -29,7 +29,6 @@ class TestResultCollectionItem: UICollectionViewCell, UITableViewDelegate, UITab
 	var displayOptions = DisplayOptions.CHART_TABLEVIEW
 	var index: Int = 0
 	
-	
 //	required init?(coder aDecoder: NSCoder) {
 //		super.init(coder: aDecoder)
 //
@@ -49,7 +48,7 @@ class TestResultCollectionItem: UICollectionViewCell, UITableViewDelegate, UITab
 		tableViewWidth.constant = (CGFloat(colCount) * 50) + 350
 		scrollView.contentSize = CGSize(width: (CGFloat(colCount) * 50) + 350, height: scrollView.frame.height)
 		
-				chart.changeBacteriaData(antibioticGroup: (Database.currentUser?.associatedTests[Database.currentTestIndex].targetedAntibiogram.antibioticGroups![index])!)
+		chart.changeBacteriaData(antibioticGroup: (Database.currentUser?.associatedTests[Database.currentTestIndex].targetedAntibiogram.antibioticGroups![index])!)
 		
 		tableView.setNeedsLayout()
 		tableView.layoutIfNeeded()

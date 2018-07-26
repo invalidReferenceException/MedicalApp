@@ -58,11 +58,10 @@ class BacteriaHeaderView: UIView {
 				}
 			}
 		}
-		
 	}
 
+	
 	override func layoutSubviews() {
-
 
 		if gramNegativeHeader != nil && gramPositiveHeader != nil {
 			
@@ -71,45 +70,67 @@ class BacteriaHeaderView: UIView {
 			
 		for bacteria in positiveBacteria {
 
-			let label = bacteriaLabel()
-			label.text = bacteria
+			let label = bacteriaLabel(With: bacteria)
 			gramPositiveHeader.addArrangedSubview(label)
 		}
 
 		for bacteria in negativeBacteria {
 
-            let label = bacteriaLabel()
-			label.text = bacteria
+			let label = bacteriaLabel(With: bacteria)
 			gramNegativeHeader.addArrangedSubview(label)
 		}
-			
-			
 	}
   }
 
 	
-	func bacteriaLabel() -> UILabel {
+	func bacteriaLabel(With text: String) -> UIView {
+		
+		let labelView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 150))
+		labelView.clipsToBounds = false
+		labelView.backgroundColor = .clear
+		
+		// Width constraint
+		labelView.addConstraint(NSLayoutConstraint.init(item:labelView,
+														attribute:NSLayoutAttribute.width,
+														relatedBy:NSLayoutRelation.equal,
+														toItem:nil,
+														attribute: NSLayoutAttribute.notAnAttribute,
+														multiplier:1,
+														constant:40))
+		
 		
 		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 150))
-		label.clipsToBounds = false
-		label.lineBreakMode = .byClipping
+		
+		
 		label.font = UIFont(name: "Helvetica", size: 11)
-		label.textAlignment = .left
+		label.textAlignment = .right
 		label.textColor = UIColor.lightGray
+		label.text = text
 		
 		label.transform = CGAffineTransform(rotationAngle: CGFloat(-45 * Double.pi / 180));
-		// Width constraint
-		label.addConstraint(NSLayoutConstraint.init(item:label,
-													attribute:NSLayoutAttribute.width,
-													relatedBy:NSLayoutRelation.equal,
-													toItem:nil,
-													attribute: NSLayoutAttribute.notAnAttribute,
-													multiplier:1,
-													constant:40))
 		
-		return label
-	
+		label.sizeToFit()
+
+		labelView.translatesAutoresizingMaskIntoConstraints = false
+		labelView.addConstraint(NSLayoutConstraint.init(item:label,
+														attribute:NSLayoutAttribute.bottom,
+														relatedBy:NSLayoutRelation.equal,
+														toItem:labelView,
+														attribute: NSLayoutAttribute.bottom,
+														multiplier:1,
+														constant:-150))
+		
+		labelView.addConstraint(NSLayoutConstraint.init(item:label,
+														attribute:NSLayoutAttribute.leading,
+														relatedBy:NSLayoutRelation.equal,
+														toItem:labelView,
+														attribute: NSLayoutAttribute.leading,
+														multiplier:1,
+														constant:0))
+		
+		labelView.addSubview(label)
+		
+		return labelView
 	}
-	
 
 }

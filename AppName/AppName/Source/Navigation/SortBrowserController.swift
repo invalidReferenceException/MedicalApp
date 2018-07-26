@@ -43,9 +43,7 @@ class SortBrowserController: UITableViewController {
 					dateOfBirth.accessoryView?.isHidden = false
 				}
 			}
-				
-			}
-		
+		}
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,13 +60,10 @@ class SortBrowserController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-
-		
         return 3
     }
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
 		
 		latestUpdated.accessoryType = UITableViewCellAccessoryType.none
 		patientName.accessoryType = UITableViewCellAccessoryType.none
@@ -85,10 +80,8 @@ class SortBrowserController: UITableViewController {
 					
 					browser.currentOrder = BrowserViewController.SortingOrder(rawValue: sortingName)!
 				}
-				
 			}
 		}
-		
 	}
 
     /*
