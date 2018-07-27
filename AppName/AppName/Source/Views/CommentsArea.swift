@@ -19,6 +19,7 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet var addCommentButton: UIButton!
 	@IBOutlet var saveAndCancelButtons: UIStackView!
 	
+	@IBOutlet var tableView: UITableView!
 	@IBAction func addCommentPressed(_ sender: Any) {
 		
 		newCommentAvatar.image = UIImage(contentsOfFile:Database.currentUser?.avatarURL ?? "")
@@ -68,9 +69,9 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		let thumbnailUrl = Database.currentUser?.avatarURL ?? ""
 		let comment = Database.PatientTest.Comment(authorName: newCommentAuthorName.text!, text: newCommentBody.text, date: newCommentDate.text!, thumbnailUrl: thumbnailUrl)
 		
-		Database.currentUser?.associatedTests[Database.currentTestIndex].comments?.append(comment)
+		Database.currentUser?.associatedTests[Database.currentTestIndex].comments.append(comment)
 		
-		//newCommentBody.text = ""
+		newCommentBody.text = "New Comment Here..."
 		newCommentBody.isEditable = false
 		newCommentBody.resignFirstResponder()
 		
@@ -84,12 +85,15 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		//newCommentBody.isHidden = true
 		
 		self.setNeedsDisplay()
+		tableView.reloadData()
+		
 	}
 	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		if let commentsCount = Database.currentUser?.associatedTests[Database.currentTestIndex].comments?.count {
+		print("Lovely tableView count: " + String( Database.currentUser?.associatedTests[Database.currentTestIndex].comments.count ?? 0))
+		if let commentsCount = Database.currentUser?.associatedTests[Database.currentTestIndex].comments.count {
 			return commentsCount
 		}
 		
@@ -100,7 +104,7 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
 		
-		if let comment =  Database.currentUser?.associatedTests[Database.currentTestIndex].comments?[indexPath.row] {
+		if let comment =  Database.currentUser?.associatedTests[Database.currentTestIndex].comments[indexPath.row] {
 			
 			cell.commentAuthorName.text = comment.authorName
 			cell.commentAuthorTagline.text = "Sample Org"

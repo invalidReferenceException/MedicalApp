@@ -59,7 +59,7 @@ class Database {
 		
 		let targetedAntibiogram: Antibiogram
 		
-		var comments: [Comment]?
+		var comments: [Comment] = []
 		
 		struct Specimen {
 			let type: String
@@ -239,7 +239,7 @@ class Database {
 										  orderedBy: (searchResult.orderedBy == 1) ? true : false,
 										  admittedBy: (searchResult.admittedBy == 1) ? true : false,
 										  targetedAntibiogram: (testPhaseFile == JSONDatabase.orderStatus1FileName) ? referenceTable : Antibiogram(antibioticGroups:phaseInfo.antibiogram),
-										  comments: nil
+										  comments: []
 			)
 			
 			tests.append(patientTest)
