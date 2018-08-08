@@ -208,13 +208,10 @@ open class BalloonMarker: MarkerImage
         _drawAttributes[.paragraphStyle] = _paragraphStyle
         _drawAttributes[.foregroundColor] = self.textColor
 		
-        
         _labelSize = label?.size(withAttributes: _drawAttributes) ?? CGSize.zero
-		
 		_labelSize.height = (label?.heightWithConstrainedWidth(width: 250, font: self.font))!
 		_labelSize.width = 250
 		
-
         var size = CGSize()
         size.width = _labelSize.width + self.insets.left + self.insets.right
         size.height = _labelSize.height + self.insets.top + self.insets.bottom

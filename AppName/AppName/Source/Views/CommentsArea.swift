@@ -22,8 +22,10 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet var tableView: UITableView!
 	@IBAction func addCommentPressed(_ sender: Any) {
 		
-		newCommentAvatar.image = UIImage(contentsOfFile:Database.currentUser?.avatarURL ?? "")
+		newCommentAvatar.image = #imageLiteral(resourceName: "font-awesome_4-7-0_user-circle_50_0_ffffff_none.png")
+	
 		newCommentAvatar.isHidden = false
+		newCommentAvatar.backgroundColor = .lightGray
 		
 		newCommentAuthorName.text = (Database.currentUser?.firstName ?? "") + " " + (Database.currentUser?.lastName ?? "")
 		newCommentAuthorName.isHidden = false
@@ -57,11 +59,11 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		saveAndCancelButtons.isHidden = true
 		addCommentButton.isHidden = false
 		
-		//newCommentAvatar.isHidden = true
-		//newCommentAuthorName.isHidden = true
-		//newCommentAuthorTagline.isHidden = true
-		//newCommentDate.isHidden = true
-		//newCommentBody.isHidden = true
+		newCommentAvatar.isHidden = true
+		newCommentAuthorName.isHidden = true
+		newCommentAuthorTagline.isHidden = true
+		newCommentDate.isHidden = true
+		newCommentBody.isHidden = true
 	}
 	
 	@IBAction func saveCommentPressed(_ sender: Any) {
@@ -75,18 +77,21 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 		newCommentBody.isEditable = false
 		newCommentBody.resignFirstResponder()
 		
+		
+		
+		
+		
 		saveAndCancelButtons.isHidden = true
 		addCommentButton.isHidden = false
 		
-//		newCommentAvatar.isHidden = true
-//		newCommentAuthorName.isHidden = true
-//		newCommentAuthorTagline.isHidden = true
-//		newCommentDate.isHidden = true
-		//newCommentBody.isHidden = true
+		newCommentAvatar.isHidden = true
+		newCommentAuthorName.isHidden = true
+		newCommentAuthorTagline.isHidden = true
+		newCommentDate.isHidden = true
+		newCommentBody.isHidden = true
 		
 		self.setNeedsDisplay()
 		tableView.reloadData()
-		
 	}
 	
 	
@@ -108,7 +113,8 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
 			
 			cell.commentAuthorName.text = comment.authorName
 			cell.commentAuthorTagline.text = "Sample Org"
-			cell.commentAvatar.image = UIImage(contentsOfFile: comment.thumbnailUrl)
+			cell.commentAvatar.backgroundColor = .lightGray
+            cell.commentAvatar.image = #imageLiteral(resourceName: "font-awesome_4-7-0_user-circle_50_0_ffffff_none.png")
 			cell.commentBody.text = comment.text
 		}
 		
@@ -122,9 +128,5 @@ class CommentsArea: UIView, UITableViewDelegate, UITableViewDataSource {
         // Drawing code
     }
     */
-
-
-	
-	
 	
 }

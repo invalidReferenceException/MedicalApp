@@ -45,6 +45,17 @@ class AlertsSetupController : UITableViewController {
            return false
 		})
 		
-		if testIndex != nil {Database.currentTestIndex = testIndex!}
+		if testIndex != nil {
+			Database.currentTestIndex = testIndex!
+			
+			let parentController = self.presentingViewController!
+			
+			
+			self.dismiss(animated: false, completion: {
+				parentController.performSegue(withIdentifier: "toTestResult", sender: parentController)
+				
+				})
+			
+		}
 	}
 }
